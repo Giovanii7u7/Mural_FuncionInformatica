@@ -1,0 +1,57 @@
+<!-- ── BUZÓN ──────────────────────────────── -->
+<section class="page-section" id="page-buzon">
+  <div class="breadcrumb">
+    <span onclick="showHome()">Inicio</span> › Buzón de Quejas y Sugerencias
+  </div>
+  <div class="page-header">
+    <div class="page-header-icon" style="background:#FDF0F8">📬</div>
+    <div>
+      <h2>Buzón de Quejas y Sugerencias</h2>
+      <p>Tu opinión contribuye a mejorar nuestra comunidad</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h4><span class="dot" style="background:#D4537E"></span>Enviar Mensaje</h4>
+    <div class="form-group">
+      <label>Tipo de mensaje</label>
+      <select>
+        <option>Sugerencia</option>
+        <option>Queja</option>
+        <option>Felicitación</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Área relacionada</label>
+      <select>
+        <option>Servicios escolares</option>
+        <option>Laboratorios</option>
+        <option>Atención docente</option>
+        <option>Instalaciones</option>
+        <option>Actividades extracurriculares</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tu mensaje</label>
+      <textarea placeholder="Describe tu queja, sugerencia o comentario de manera clara y respetuosa..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>¿Deseas que te contacten? (opcional)</label>
+      <input type="email" placeholder="tu.correo@ejemplo.com"/>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Los mensajes son anónimos a menos que proporciones tu correo. Todos los comentarios son revisados por coordinación.</p>
+    <button class="btn-primary" onclick="submitForm()">Enviar mensaje →</button>
+  </div>
+
+  <div id="form-success" style="display:none" class="content-card">
+    <div style="text-align:center;padding:1rem">
+      <div style="font-size:48px;margin-bottom:.5rem">✅</div>
+      <h4 style="font-size:16px;margin-bottom:.5rem;display:block">¡Mensaje enviado!</h4>
+      <p style="color:var(--muted);font-size:14px">Gracias por tu retroalimentación. Tu mensaje fue recibido y será revisado por coordinación.</p>
+    </div>
+  </div>
+
+  <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-buzon">#buzon</code></div>
+</section>

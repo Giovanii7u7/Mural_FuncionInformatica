@@ -1,0 +1,59 @@
+<!-- ── CUMPLEAÑOS ─────────────────────────── -->
+<section class="page-section" id="page-cumple">
+  <div class="breadcrumb">
+    <span onclick="showHome()">Inicio</span> › Cumpleaños del Mes
+  </div>
+  <div class="page-header">
+    <div class="page-header-icon" style="background:#fff0f5">🎂</div>
+    <div>
+      <h2>Cumpleaños del Mes</h2>
+      <p>¡Celebremos juntos a quienes cumplen años este mes!</p>
+    </div>
+  </div>
+
+  <!-- Admin panel -->
+  <button class="admin-toggle" onclick="toggleAdmin()">⚙️ Panel de administrador</button>
+  <div class="admin-panel" id="admin-panel">
+    <h4>🗂 Agregar / eliminar cumpleaños</h4>
+    <div class="admin-form">
+      <input type="text" id="adm-nombre" placeholder="Nombre completo"/>
+      <select id="adm-grupo">
+        <option value="">Grupo</option>
+        <option>1°A Informática</option>
+        <option>2°A Informática</option>
+        <option>3°A Informática</option>
+        <option>4°A Informática</option>
+        <option>1°A DSyS</option>
+        <option>2°A DSyS</option>
+        <option>3°A DSyS</option>
+        <option>4°A DSyS</option>
+        <option>Docente</option>
+      </select>
+      <input type="date" id="adm-fecha"/>
+      <button class="btn-add" onclick="adminAdd()">+ Agregar</button>
+    </div>
+    <div class="admin-list" id="admin-list"></div>
+  </div>
+
+  <!-- Banner hoy -->
+  <div class="bday-today-banner hidden" id="bday-today-banner">
+    <div>
+      <h4 id="bday-today-names">¡Hoy es el cumpleaños de alguien!</h4>
+      <p>Haz clic en su tarjeta para mandarle una felicitación 🎉</p>
+    </div>
+  </div>
+
+  <!-- Navegación de mes -->
+  <div class="bday-toolbar">
+    <div class="bday-month-nav">
+      <button onclick="changeMonth(-1)">‹</button>
+      <div class="bday-month-title" id="bday-month-title">Marzo 2025</div>
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+  </div>
+
+  <!-- Grid de tarjetas -->
+  <div class="bday-grid" id="bday-grid"></div>
+
+  <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-cumple">#cumple</code></div>
+</section>

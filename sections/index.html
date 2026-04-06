@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Periódico Mural Digital — UNISTMO Campus Ixtepec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/layout.css"/>
+<link rel="stylesheet" href="css/components.css"/>
+<link rel="stylesheet" href="css/cumpleanios.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="brand" onclick="showHome()" style="cursor:pointer">
+    <div class="logo-mark">U</div>
+    <div class="brand-text">
+      <div class="brand-name">Periódico Mural Digital</div>
+      <div class="brand-sub">UNISTMO · Campus Ixtepec</div>
+    </div>
+  </div>
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════════════ -->
+<nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-section-label">Inicio</div>
+  <div class="nav-item active" id="nav-home" onclick="showHome()">
+    <span class="nav-icon">🏠</span>
+    <span>Inicio</span>
+  </div>
+
+  <div class="sidebar-section-label">Noticias</div>
+  <div class="nav-item" id="nav-noticias" onclick="showSection('noticias')">
+    <span class="nav-icon">📰</span>
+    <span>Noticias por Trimestre</span>
+  </div>
+
+  <div class="sidebar-section-label">Académico</div>
+  <div class="nav-item" id="nav-academica" onclick="showSection('academica')">
+    <span class="nav-icon">📚</span>
+    <span>Sección Académica</span>
+  </div>
+  <div class="nav-sub-item" onclick="showSection('academica', 'horarios')">Horarios de Laboratorio</div>
+  <div class="nav-sub-item" onclick="showSection('academica', 'maestros')">Directorio de Maestros</div>
+  <div class="nav-sub-item" onclick="showSection('academica', 'recursos')">Recursos de Estudio</div>
+
+  <div class="sidebar-section-label">Comunidad</div>
+  <div class="nav-item" id="nav-logros" onclick="showSection('logros')">
+    <span class="nav-icon">🏆</span>
+    <span>Logros y Reconocimientos</span>
+  </div>
+  <div class="nav-sub-item" onclick="showSection('logros', 'destacados')">Estudiantes Destacados</div>
+  <div class="nav-sub-item" onclick="showSection('logros', 'promedios')">Promedios Grupales</div>
+
+  <div class="nav-item" id="nav-eventos" onclick="showSection('eventos')">
+    <span class="nav-icon">📅</span>
+    <span>Eventos Próximos</span>
+  </div>
+
+  <div class="nav-item" id="nav-datos" onclick="showSection('datos')">
+    <span class="nav-icon">💡</span>
+    <span>Datos Curiosos</span>
+  </div>
+
+  <div class="nav-item" id="nav-cumple" onclick="showSection('cumple')">
+    <span class="nav-icon">🎂</span>
+    <span>Cumpleaños del Mes</span>
+  </div>
+
+  <div class="sidebar-section-label">Contacto</div>
+  <div class="nav-item" id="nav-buzon" onclick="showSection('buzon')">
+    <span class="nav-icon">📬</span>
+    <span>Buzón de Quejas y Sugerencias</span>
+  </div>
+
+  <div class="nav-item" id="nav-redes" onclick="showSection('redes')">
+    <span class="nav-icon">🌐</span>
+    <span>Redes Sociales</span>
+  </div>
+
+</nav>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN — secciones de contenido
+═══════════════════════════════════════════ -->
+<main class="main">
+  <!-- cada archivo en sections/ contiene un <section class="page-section"> -->
+  <div id="section-home"></div>
+  <div id="section-noticias"></div>
+  <div id="section-academica"></div>
+  <div id="section-logros"></div>
+  <div id="section-eventos"></div>
+  <div id="section-datos"></div>
+  <div id="section-buzon"></div>
+  <div id="section-redes"></div>
+  <div id="section-cumple"></div>
+</main>
+
+<!-- ── Modal de felicitaciones (muro público) ── -->
+<div class="bday-modal-overlay" id="bday-modal" onclick="closeBdayModal(event)">
+  <div class="bday-modal">
+    <button class="bday-modal-close" onclick="closeBdayModal()">✕</button>
+
+    <!-- Cabecera del cumpleañero -->
+    <div class="bday-modal-avatar" id="modal-avatar"></div>
+    <h3 id="modal-name"></h3>
+    <div class="modal-group" id="modal-group"></div>
+    <div class="modal-date" id="modal-date"></div>
+
+    <!-- Separador -->
+    <div style="height:1px;background:var(--border);margin:1.25rem 0"></div>
+
+    <!-- Muro de comentarios -->
+    <div style="text-align:left">
+      <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.75rem">
+        🎉 Felicitaciones de sus compañeros
+      </p>
+      <div id="modal-comments-list" style="display:flex;flex-direction:column;gap:.6rem;max-height:220px;overflow-y:auto;margin-bottom:1rem;padding-right:4px"></div>
+
+      <!-- Formulario para dejar felicitación -->
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:1rem">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:.65rem">Deja tu felicitación ✍️</p>
+        <input id="comment-author" type="text" placeholder="Tu nombre"
+          style="width:100%;border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-family:'DM Sans',sans-serif;font-size:13px;margin-bottom:.5rem;outline:none;background:white"/>
+        <textarea id="comment-text" placeholder="Escribe tu mensaje aquí..."
+          style="width:100%;border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-family:'DM Sans',sans-serif;font-size:13px;resize:none;height:72px;outline:none;background:white;display:block"></textarea>
+        <button onclick="submitComment()"
+          style="margin-top:.6rem;background:var(--navy);color:white;border:none;border-radius:8px;padding:.5rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .2s"
+          onmouseover="this.style.background='#1A5C9E'" onmouseout="this.style.background='var(--navy)'">
+          Enviar felicitación 🎈
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confeti canvas -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT — módulos
+═══════════════════════════════════════════ -->
+<script src="js/sidebar.js"></script>
+<script src="js/router.js"></script>
+<script src="js/buzon.js"></script>
+<script src="js/cumpleanios.js"></script>
+
+<!-- Carga de secciones HTML en sus contenedores -->
+<script>
+  const sectionFiles = [
+    { id: 'section-home',      file: 'sections/home.html'       },
+    { id: 'section-noticias',  file: 'sections/noticias.html'   },
+    { id: 'section-academica', file: 'sections/academica.html'  },
+    { id: 'section-logros',    file: 'sections/logros.html'     },
+    { id: 'section-eventos',   file: 'sections/eventos.html'    },
+    { id: 'section-datos',     file: 'sections/datos.html'      },
+    { id: 'section-buzon',     file: 'sections/buzon.html'      },
+    { id: 'section-redes',     file: 'sections/redes.html'      },
+    { id: 'section-cumple',    file: 'sections/cumpleanios.html' },
+  ];
+
+  Promise.all(
+    sectionFiles.map(({ id, file }) =>
+      fetch(file)
+        .then(r => r.text())
+        .then(html => { document.getElementById(id).innerHTML = html; })
+    )
+  ).then(() => {
+    // Una vez cargadas todas las secciones, inicializar routing y cumpleaños
+    if (typeof routeFromHash === 'function') routeFromHash();
+    if (typeof updateQRUrls  === 'function') updateQRUrls();
+    if (typeof renderBdays   === 'function') renderBdays();
+  });
+</script>
+
+</body>
+</html>

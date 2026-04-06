@@ -1,0 +1,72 @@
+<section class="page-section" id="page-opinion">
+  <div class="breadcrumb">
+    <span onclick="showHome()">Inicio</span> › Opinión
+  </div>
+  <div class="page-header">
+    <div class="page-header-icon" style="background:#FFF0F8">💬</div>
+    <div>
+      <h2>Opinión</h2>
+      <p>Reflexiones, comentarios y participación de la comunidad escolar</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <h4><span class="dot" style="background:#D4537E"></span>La voz de la comunidad</h4>
+    <p style="margin-bottom:1rem;color:var(--muted)">Esta sección reúne espacios de participación y comentarios con enfoque constructivo para mejorar la experiencia estudiantil.</p>
+    <div style="display:grid;gap:.85rem">
+      <div style="padding:1rem;border:1px solid var(--border);border-radius:14px;background:#fff">
+        <h5 style="margin-bottom:.35rem">Sugerencias estudiantiles</h5>
+        <p style="color:var(--muted)">Propuestas sobre servicios escolares, instalaciones, laboratorios y actividades extracurriculares.</p>
+      </div>
+      <div style="padding:1rem;border:1px solid var(--border);border-radius:14px;background:#fff">
+        <h5 style="margin-bottom:.35rem">Comentarios y reflexiones</h5>
+        <p style="color:var(--muted)">Espacio abierto para compartir puntos de vista, ideas de mejora y observaciones de interés general.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card" id="opinion-form-card">
+    <h4><span class="dot" style="background:#D4537E"></span>Participa también desde el buzón</h4>
+    <p>El buzón deja de ser una sección aparte y se integra aquí como canal práctico para enviar opiniones, quejas, felicitaciones o sugerencias de manera respetuosa.</p>
+    <div class="form-group" style="margin-top:1rem">
+      <label>Tipo de mensaje</label>
+      <select>
+        <option>Sugerencia</option>
+        <option>Queja</option>
+        <option>Felicitación</option>
+        <option>Reflexión</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Área relacionada</label>
+      <select>
+        <option>Servicios escolares</option>
+        <option>Laboratorios</option>
+        <option>Atención docente</option>
+        <option>Instalaciones</option>
+        <option>Actividades extracurriculares</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tu mensaje</label>
+      <textarea placeholder="Describe tu opinión, sugerencia o comentario de manera clara y respetuosa..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>¿Deseas que te contacten? (opcional)</label>
+      <input type="email" placeholder="tu.correo@ejemplo.com"/>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Los mensajes son anónimos a menos que proporciones tu correo. Todos los comentarios son revisados por coordinación.</p>
+    <button class="btn-primary" onclick="submitForm()">Enviar mensaje →</button>
+  </div>
+
+  <div id="form-success" style="display:none" class="content-card">
+    <div style="text-align:center;padding:1rem">
+      <div style="font-size:48px;margin-bottom:.5rem">✅</div>
+      <h4 style="font-size:16px;margin-bottom:.5rem;display:block">¡Mensaje enviado!</h4>
+      <p style="color:var(--muted);font-size:14px">Gracias por tu participación. Tu mensaje fue recibido y será revisado por coordinación.</p>
+    </div>
+  </div>
+
+  <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-opinion">#opinion</code></div>
+</section>

@@ -24,6 +24,7 @@ function defaultBdays() {
     { id:5, nombre:'Fernanda Cruz',    grupo:'2°A DSyS',         fecha:`${y}-03-28`, color:'#D4537E' },
     { id:6, nombre:'Jorge Méndez',     grupo:'3°A Informática',  fecha:`${y}-04-03`, color:'#C49A3C' },
     { id:7, nombre:'Valeria Sánchez',  grupo:'1°A Informática',  fecha:`${y}-04-15`, color:'#3B8BD4' },
+    { id:8, nombre:'Daniel Ortega',    grupo:'2Â°A InformÃ¡tica',  fecha:`${y}-04-19`, color:'#1D9E75' },
   ];
 }
 

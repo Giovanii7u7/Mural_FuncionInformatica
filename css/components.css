@@ -422,6 +422,18 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   transform: translateY(-1px);
 }
 
+.humor-construction-card {
+  padding: 1.25rem;
+}
+.humor-construction-image {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  max-height: 75vh;
+}
+
 /* Dato curioso */
 .dato-card {
   background: var(--navy);

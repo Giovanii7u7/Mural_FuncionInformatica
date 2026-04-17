@@ -29,35 +29,36 @@
     <h4><span class="dot" style="background:#D4537E"></span>Participa también desde el buzón</h4>
     <p>El buzón deja de ser una sección aparte y se integra aquí como canal práctico para enviar opiniones, quejas, felicitaciones o sugerencias de manera respetuosa.</p>
     <div class="form-group" style="margin-top:1rem">
-      <label>Tipo de mensaje</label>
-      <select>
-        <option>Sugerencia</option>
-        <option>Queja</option>
-        <option>Felicitación</option>
-        <option>Reflexión</option>
+      <label for="feedback-type">Tipo de mensaje</label>
+      <select id="feedback-type">
+        <option value="sugerencia">Sugerencia</option>
+        <option value="queja">Queja</option>
+        <option value="felicitacion">Felicitación</option>
+        <option value="opinion">Reflexión</option>
       </select>
     </div>
     <div class="form-group">
-      <label>Área relacionada</label>
-      <select>
-        <option>Servicios escolares</option>
-        <option>Laboratorios</option>
-        <option>Atención docente</option>
-        <option>Instalaciones</option>
-        <option>Actividades extracurriculares</option>
-        <option>Otro</option>
+      <label for="feedback-area">Área relacionada</label>
+      <select id="feedback-area">
+        <option value="Servicios escolares">Servicios escolares</option>
+        <option value="Laboratorios">Laboratorios</option>
+        <option value="Atención docente">Atención docente</option>
+        <option value="Instalaciones">Instalaciones</option>
+        <option value="Actividades extracurriculares">Actividades extracurriculares</option>
+        <option value="Otro">Otro</option>
       </select>
     </div>
     <div class="form-group">
-      <label>Tu mensaje</label>
-      <textarea placeholder="Describe tu opinión, sugerencia o comentario de manera clara y respetuosa..."></textarea>
+      <label for="feedback-message">Tu mensaje</label>
+      <textarea id="feedback-message" placeholder="Describe tu opinión, sugerencia o comentario de manera clara y respetuosa..."></textarea>
     </div>
     <div class="form-group">
-      <label>¿Deseas que te contacten? (opcional)</label>
-      <input type="email" placeholder="tu.correo@ejemplo.com"/>
+      <label for="feedback-email">¿Deseas que te contacten? (opcional)</label>
+      <input id="feedback-email" type="email" placeholder="tu.correo@ejemplo.com"/>
     </div>
+    <p id="feedback-error" style="display:none;font-size:12px;color:#b42318;margin-bottom:1rem"></p>
     <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Los mensajes son anónimos a menos que proporciones tu correo. Todos los comentarios son revisados por coordinación.</p>
-    <button class="btn-primary" onclick="submitForm()">Enviar mensaje →</button>
+    <button class="btn-primary" id="feedback-submit" onclick="submitForm()">Enviar mensaje →</button>
   </div>
 
   <div id="form-success" style="display:none" class="content-card">

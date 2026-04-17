@@ -141,6 +141,54 @@
   </div>
 </div>
 
+<div class="bday-modal-overlay" id="birthday-submit-modal" onclick="closeBirthdaySubmitModal(event)">
+  <div class="bday-modal birthday-submit-modal-card">
+    <button class="bday-modal-close" onclick="closeBirthdaySubmitModal()">✕</button>
+    <h3 style="margin-bottom:.35rem">Agrega tu cumpleaños</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:1.25rem">Tu información se enviará para revisión antes de publicarse.</p>
+
+    <div class="form-group" style="text-align:left">
+      <label for="birthday-full-name">Nombre completo</label>
+      <input id="birthday-full-name" type="text" placeholder="Escribe tu nombre completo"/>
+    </div>
+    <div class="form-group" style="text-align:left">
+      <label for="birthday-group">Grupo</label>
+      <input id="birthday-group" type="text" placeholder="Ejemplo: 217, 417, 608, 1008"/>
+    </div>
+    <div class="birthday-date-grid">
+      <div class="form-group" style="text-align:left">
+        <label for="birthday-day">Día</label>
+        <input id="birthday-day" type="number" min="1" max="31" placeholder="20"/>
+      </div>
+      <div class="form-group" style="text-align:left">
+        <label for="birthday-month">Mes</label>
+        <select id="birthday-month">
+          <option value="">Selecciona</option>
+          <option value="1">Enero</option>
+          <option value="2">Febrero</option>
+          <option value="3">Marzo</option>
+          <option value="4">Abril</option>
+          <option value="5">Mayo</option>
+          <option value="6">Junio</option>
+          <option value="7">Julio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Septiembre</option>
+          <option value="10">Octubre</option>
+          <option value="11">Noviembre</option>
+          <option value="12">Diciembre</option>
+        </select>
+      </div>
+    </div>
+
+    <p id="birthday-submit-error" style="display:none;font-size:12px;color:#b42318;margin:.25rem 0 1rem;text-align:left"></p>
+    <div id="birthday-submit-success" style="display:none;font-size:13px;color:#127c48;background:#ecfdf3;border:1px solid #abefc6;border-radius:10px;padding:.8rem 1rem;margin-bottom:1rem;text-align:left">
+      Tu cumpleaños fue enviado correctamente para revisión.
+    </div>
+
+    <button class="btn-primary" id="birthday-submit-button" onclick="submitBirthdayRequest()">Enviar para revisión →</button>
+  </div>
+</div>
+
 <canvas id="confetti-canvas"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

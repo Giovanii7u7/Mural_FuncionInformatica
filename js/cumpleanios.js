@@ -1,4 +1,3 @@
-// Birthday wall
 const AVATAR_COLORS = ["#1A5C9E", "#1D9E75", "#7F77DD", "#C49A3C", "#D4537E", "#0E2340", "#E8943A", "#3B8BD4"];
 const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 const BDAY_DATA_VERSION = "2026-04-real-bdays-v1";
@@ -49,6 +48,11 @@ let bdayData = loadBdays();
 const today = new Date();
 let viewMonth = today.getMonth();
 let viewYear = today.getFullYear();
+let currentBdayId = null;
+let confettiAnim = null;
+const cvs = document.getElementById("confetti-canvas");
+const ctx2 = cvs.getContext("2d");
+let pieces = [];
 
 function initials(name) {
   return name.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();
@@ -129,8 +133,6 @@ function changeMonth(dir) {
   }
   renderBdays();
 }
-
-let currentBdayId = null;
 
 function loadComments(bdayId) {
   try {
@@ -231,10 +233,80 @@ function closeBdayModal(e) {
   }
 }
 
-let confettiAnim = null;
-const cvs = document.getElementById("confetti-canvas");
-const ctx2 = cvs.getContext("2d");
-let pieces = [];
+function openBirthdaySubmitModal() {
+  const modal = document.getElementById("birthday-submit-modal");
+  const errorBox = document.getElementById("birthday-submit-error");
+  const successBox = document.getElementById("birthday-submit-success");
+  if (errorBox) {
+    errorBox.style.display = "none";
+    errorBox.textContent = "";
+  }
+  if (successBox) successBox.style.display = "none";
+  if (modal) modal.classList.add("open");
+}
+
+function closeBirthdaySubmitModal(e) {
+  const modal = document.getElementById("birthday-submit-modal");
+  if (!modal) return;
+  if (!e || e.target === modal || e.currentTarget.tagName === "BUTTON") {
+    modal.classList.remove("open");
+  }
+}
+
+async function submitBirthdayRequest() {
+  const nameField = document.getElementById("birthday-full-name");
+  const groupField = document.getElementById("birthday-group");
+  const dayField = document.getElementById("birthday-day");
+  const monthField = document.getElementById("birthday-month");
+  const errorBox = document.getElementById("birthday-submit-error");
+  const successBox = document.getElementById("birthday-submit-success");
+  const button = document.getElementById("birthday-submit-button");
+
+  if (!nameField || !groupField || !dayField || !monthField || !errorBox || !successBox || !button) return;
+
+  const fullName = nameField.value.trim();
+  const groupName = groupField.value.trim();
+  const birthDay = Number(dayField.value);
+  const birthMonth = Number(monthField.value);
+
+  errorBox.style.display = "none";
+  errorBox.textContent = "";
+  successBox.style.display = "none";
+
+  if (!fullName || !groupName || !birthDay || !birthMonth) {
+    errorBox.textContent = "Completa nombre, grupo, día y mes.";
+    errorBox.style.display = "block";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Enviando...";
+
+  const { error } = await supabaseClient.from("birthday_submissions").insert([
+    {
+      full_name: fullName,
+      group_name: groupName,
+      birth_day: birthDay,
+      birth_month: birthMonth,
+    },
+  ]);
+
+  button.disabled = false;
+  button.textContent = "Enviar para revisión →";
+
+  if (error) {
+    console.error("Supabase birthday submission error:", error);
+    errorBox.textContent = "No se pudo enviar tu cumpleaños. Intenta nuevamente.";
+    errorBox.style.display = "block";
+    return;
+  }
+
+  nameField.value = "";
+  groupField.value = "";
+  dayField.value = "";
+  monthField.value = "";
+  successBox.style.display = "block";
+}
 
 function launchConfetti() {
   cvs.width = window.innerWidth;
@@ -289,60 +361,6 @@ function stopConfetti() {
     confettiAnim = null;
   }
   ctx2.clearRect(0, 0, cvs.width, cvs.height);
-}
-
-function toggleAdmin() {
-  const p = document.getElementById("admin-panel");
-  p.classList.toggle("open");
-  if (p.classList.contains("open")) renderAdminList();
-}
-
-function renderAdminList() {
-  const list = document.getElementById("admin-list");
-  list.innerHTML = "";
-  if (bdayData.length === 0) {
-    list.innerHTML = '<p style="color:var(--muted);font-size:13px">Sin registros.</p>';
-    return;
-  }
-  bdayData.forEach((b) => {
-    const d = new Date(b.fecha + "T12:00:00");
-    const row = document.createElement("div");
-    row.className = "admin-list-item";
-    row.innerHTML = `
-      <div class="bday-avatar" style="background:${b.color};width:28px;height:28px;font-size:11px">${initials(b.nombre)}</div>
-      <span>${b.nombre}</span>
-      <span class="item-group">${b.grupo}</span>
-      <span class="item-group">${d.getDate()} ${MESES[d.getMonth()].slice(0, 3)} ${d.getFullYear()}</span>
-      <button class="btn-del" onclick="adminDel(${b.id})">✕</button>
-    `;
-    list.appendChild(row);
-  });
-}
-
-function adminAdd() {
-  const nombre = document.getElementById("adm-nombre").value.trim();
-  const grupo = document.getElementById("adm-grupo").value;
-  const fecha = document.getElementById("adm-fecha").value;
-  if (!nombre || !grupo || !fecha) {
-    alert("Completa todos los campos.");
-    return;
-  }
-  const color = AVATAR_COLORS[bdayData.length % AVATAR_COLORS.length];
-  const id = Date.now();
-  bdayData.push({ id, nombre, grupo, fecha, color, genero: "hombre" });
-  saveBdays(bdayData);
-  document.getElementById("adm-nombre").value = "";
-  document.getElementById("adm-grupo").value = "";
-  document.getElementById("adm-fecha").value = "";
-  renderAdminList();
-  renderBdays();
-}
-
-function adminDel(id) {
-  bdayData = bdayData.filter((b) => b.id !== id);
-  saveBdays(bdayData);
-  renderAdminList();
-  renderBdays();
 }
 
 document.getElementById("nav-cumple") && (() => {

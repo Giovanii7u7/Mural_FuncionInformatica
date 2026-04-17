@@ -13,9 +13,6 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     HEADER
-═══════════════════════════════════════════ -->
 <header class="site-header">
   <div class="brand" onclick="showHome()" style="cursor:pointer">
     <div class="logo-mark">U</div>
@@ -24,14 +21,14 @@
       <div class="brand-sub">UNISTMO · Campus Ixtepec</div>
     </div>
   </div>
+  <div class="header-career-badge">
+    <img src="logo_Carrera.jpg" alt="Logo de la carrera" class="career-logo"/>
+  </div>
   <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
 </header>
 
-<!-- ═══════════════════════════════════════════
-     SIDEBAR
-═══════════════════════════════════════════ -->
 <nav class="sidebar" id="sidebar">
 
   <div class="sidebar-section-label">Inicio</div>
@@ -98,11 +95,7 @@
 
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- ═══════════════════════════════════════════
-     MAIN — secciones de contenido
-═══════════════════════════════════════════ -->
 <main class="main">
-  <!-- cada archivo en sections/ contiene un <section class="page-section"> -->
   <div id="section-home"></div>
   <div id="section-noticias"></div>
   <div id="section-cultura"></div>
@@ -115,28 +108,23 @@
   <div id="section-cumple"></div>
 </main>
 
-<!-- ── Modal de felicitaciones (muro público) ── -->
 <div class="bday-modal-overlay" id="bday-modal" onclick="closeBdayModal(event)">
   <div class="bday-modal">
     <button class="bday-modal-close" onclick="closeBdayModal()">✕</button>
 
-    <!-- Cabecera del cumpleañero -->
     <div class="bday-modal-avatar" id="modal-avatar"></div>
     <h3 id="modal-name"></h3>
     <div class="modal-group" id="modal-group"></div>
     <div class="modal-date" id="modal-date"></div>
 
-    <!-- Separador -->
     <div style="height:1px;background:var(--border);margin:1.25rem 0"></div>
 
-    <!-- Muro de comentarios -->
     <div style="text-align:left">
       <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.75rem">
         🎉 Felicitaciones de sus compañeros
       </p>
       <div id="modal-comments-list" style="display:flex;flex-direction:column;gap:.6rem;max-height:220px;overflow-y:auto;margin-bottom:1rem;padding-right:4px"></div>
 
-      <!-- Formulario para dejar felicitación -->
       <div style="background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:1rem">
         <p style="font-size:12px;color:var(--muted);margin-bottom:.65rem">Deja tu felicitación ✍️</p>
         <input id="comment-author" type="text" placeholder="Tu nombre"
@@ -153,18 +141,13 @@
   </div>
 </div>
 
-<!-- Confeti canvas -->
 <canvas id="confetti-canvas"></canvas>
 
-<!-- ═══════════════════════════════════════════
-     JAVASCRIPT — módulos
-═══════════════════════════════════════════ -->
 <script src="js/sidebar.js"></script>
 <script src="js/router.js"></script>
 <script src="js/buzon.js"></script>
 <script src="js/cumpleanios.js"></script>
 
-<!-- Carga de secciones HTML en sus contenedores -->
 <script>
   const sectionFiles = [
     { id: 'section-home',      file: 'sections/home.html'       },
@@ -186,7 +169,6 @@
         .then(html => { document.getElementById(id).innerHTML = html; })
     )
   ).then(() => {
-    // Una vez cargadas todas las secciones, inicializar routing y cumpleaños
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
     if (typeof renderBdays   === 'function') renderBdays();

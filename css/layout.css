@@ -42,6 +42,22 @@
   letter-spacing: .04em;
   text-transform: uppercase;
 }
+.header-career-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+.career-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
 .menu-toggle {
   background: none; border: none;
   cursor: pointer;
@@ -158,5 +174,16 @@
     width: calc(100% - 280px);
     margin-left: 280px;
     margin-right: 0;
+  }
+}
+
+@media (max-width: 899px) {
+  .header-career-badge {
+    margin-right: .75rem;
+  }
+  .career-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
   }
 }

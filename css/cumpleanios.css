@@ -102,6 +102,15 @@
   font-weight: 700;
   color: white;
 }
+.bday-avatar-photo {
+  overflow: hidden;
+}
+.bday-avatar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .bday-card h5 { font-size: 13px; font-weight: 500; margin-bottom: .2rem; line-height: 1.3; }
 .bday-card .bday-group { font-size: 11px; color: var(--muted); margin-bottom: .4rem; }
 .bday-date-pill {
@@ -172,6 +181,12 @@
   font-size: 36px;
   font-weight: 700;
   color: white;
+}
+.bday-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .bday-modal h3 {
   font-family: 'Fraunces', serif;

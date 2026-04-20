@@ -8,6 +8,7 @@ function showHome() {
   closeSidebar();
   history.pushState(null, '', window.location.pathname);
   updateQRUrls();
+  if (typeof trackPageView === 'function') trackPageView('home');
 }
 
 function showSection(id, sub = null) {
@@ -18,6 +19,7 @@ function showSection(id, sub = null) {
   const hash = sub ? id + '/' + sub : id;
   history.pushState(null, '', '#' + hash);
   updateQRUrls();
+  if (typeof trackPageView === 'function') trackPageView(id);
   if (sub) {
     setTimeout(() => {
       const el = document.getElementById('sub-' + sub);

@@ -78,7 +78,7 @@ function renderBdays() {
   const inMonth = bdayData
     .filter((b) => {
       const d = new Date(b.fecha + "T12:00:00");
-      return d.getMonth() === viewMonth && d.getFullYear() === viewYear;
+      return d.getMonth() === viewMonth;
     })
     .sort((a, b) => new Date(a.fecha + "T12:00:00") - new Date(b.fecha + "T12:00:00"));
 

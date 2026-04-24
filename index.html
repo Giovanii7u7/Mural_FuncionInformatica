@@ -16,7 +16,9 @@
 
 <header class="site-header">
   <div class="brand" onclick="showHome()" style="cursor:pointer">
-    <div class="logo-mark">U</div>
+    <div class="logo-mark">
+      <img src="logo_unistmo.png" alt="Logo de la Universidad del Istmo" class="brand-logo-image"/>
+    </div>
     <div class="brand-text">
       <div class="brand-name">Periódico Mural Digital</div>
       <div class="brand-sub">UNISTMO · Campus Ixtepec</div>
@@ -190,6 +192,12 @@
   </div>
 </div>
 
+<div class="image-lightbox" id="image-lightbox" onclick="closeImageLightbox(event)">
+  <button class="image-lightbox-close" type="button" onclick="closeImageLightbox()">✕</button>
+  <img id="image-lightbox-media" alt="Vista ampliada de imagen"/>
+  <p id="image-lightbox-caption"></p>
+</div>
+
 <canvas id="confetti-canvas"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -199,6 +207,7 @@
 <script src="js/router.js"></script>
 <script src="js/buzon.js"></script>
 <script src="js/tutorias.js"></script>
+<script src="js/lightbox.js"></script>
 <script src="js/cumpleanios.js"></script>
 
 <script>
@@ -225,6 +234,7 @@
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
     if (typeof initTutorias  === 'function') initTutorias();
+    if (typeof initImageLightbox === 'function') initImageLightbox();
     if (typeof renderBdays   === 'function') renderBdays();
   });
 </script>

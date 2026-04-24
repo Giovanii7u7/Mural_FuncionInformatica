@@ -356,6 +356,12 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   border-radius: 14px;
   border: 1px solid var(--border);
   display: block;
+  cursor: zoom-in;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.news-gallery img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(9,25,48,.14);
 }
 .news-meta {
   display: flex;
@@ -548,6 +554,55 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   border: 1px solid var(--border);
   object-fit: cover;
   max-height: 75vh;
+  cursor: zoom-in;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 2rem 1rem;
+  background: rgba(5, 13, 27, .88);
+  backdrop-filter: blur(8px);
+  z-index: 250;
+}
+
+.image-lightbox.open {
+  display: grid;
+}
+
+.image-lightbox img {
+  max-width: min(1100px, 94vw);
+  max-height: calc(100vh - 6rem);
+  width: auto;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.38);
+  border: 1px solid rgba(255,255,255,.1);
+  background: #fff;
+}
+
+.image-lightbox p {
+  margin-top: 1rem;
+  color: rgba(255,255,255,.88);
+  font-size: 14px;
+  text-align: center;
+  max-width: min(820px, 92vw);
+}
+
+.image-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 /* Dato curioso */

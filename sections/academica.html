@@ -95,10 +95,48 @@
       <div style="padding:.75rem;background:#F7F9FC;border-radius:8px;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:20px">📅</span>
         <div>
-          <div style="font-size:14px;font-weight:500">Horario de Tutorías</div>
-          <div style="font-size:12px;color:var(--muted)">Sesiones individuales con tutores asignados</div>
+          <div style="font-size:14px;font-weight:500">Consulta de Tutorías</div>
+          <div style="font-size:12px;color:var(--muted)">Busca por alumno o tutor sin exponer matrícula ni correos</div>
         </div>
-        <span style="margin-left:auto;color:var(--sky);font-size:13px">Ver →</span>
+        <span style="margin-left:auto;color:var(--sky);font-size:13px">Disponible abajo ↓</span>
+      </div>
+    </div>
+
+    <div class="tutorias-browser">
+      <div class="tutorias-browser-head">
+        <div>
+          <h5>Asignación de tutorías IDSSI</h5>
+          <p>Consulta rápida del alumnado y su tutor asignado.</p>
+        </div>
+        <label class="tutorias-search">
+          <span>🔍</span>
+          <input id="tutorias-search" type="text" placeholder="Buscar por alumno o tutor"/>
+        </label>
+      </div>
+
+      <div class="table-wrap tutorias-table-wrap">
+        <table class="tutorias-table">
+          <thead>
+            <tr>
+              <th>Alumno</th>
+              <th>Tutor</th>
+            </tr>
+          </thead>
+          <tbody id="tutorias-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="tutorias-empty" id="tutorias-empty" hidden>
+        No se encontraron coincidencias con esa búsqueda.
+      </div>
+
+      <div class="tutorias-footer">
+        <p id="tutorias-summary">Mostrando registros...</p>
+        <div class="tutorias-pagination">
+          <button type="button" id="tutorias-prev">Anterior</button>
+          <span id="tutorias-page-indicator">Página 1</span>
+          <button type="button" id="tutorias-next">Siguiente</button>
+        </div>
       </div>
     </div>
   </div>

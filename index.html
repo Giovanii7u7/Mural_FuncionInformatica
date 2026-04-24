@@ -197,6 +197,7 @@
 <script src="js/visits.js"></script>
 <script src="js/router.js"></script>
 <script src="js/buzon.js"></script>
+<script src="js/tutorias.js"></script>
 <script src="js/cumpleanios.js"></script>
 
 <script>
@@ -222,6 +223,7 @@
   ).then(() => {
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
+    if (typeof initTutorias  === 'function') initTutorias();
     if (typeof renderBdays   === 'function') renderBdays();
   });
 </script>

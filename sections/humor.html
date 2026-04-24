@@ -30,9 +30,32 @@
   </div>
   -->
 
-  <div class="content-card humor-construction-card">
-    <h4><span class="dot" style="background:#C49A3C"></span>Sección en construcción</h4>
-    <img src="funny_cat.jpg" alt="Imagen temporal para la sección de humor" class="humor-construction-image"/>
+  <div class="content-card humor-wheel-card">
+    <h4><span class="dot" style="background:#C49A3C"></span>¿Qué toca hacer hoy?</h4>
+    <p class="humor-wheel-intro">Una ruleta con malas decisiones muy reales... y una opción que sí te conviene.</p>
+
+    <div class="humor-wheel-layout">
+      <div class="humor-wheel-stage">
+        <div class="humor-wheel-pointer" aria-hidden="true"></div>
+        <div class="humor-wheel" id="humor-wheel"></div>
+      </div>
+
+      <div class="humor-wheel-side">
+        <!--
+        <div class="humor-result-box">
+          <p class="humor-result-label">Resultado</p>
+          <h5 id="humor-result">Pulsa girar para ver qué te depara el destino.</h5>
+        </div>
+        -->
+
+        <div class="humor-options-box">
+          <p class="humor-options-title">Opciones de esta ronda</p>
+          <ul id="humor-options-list"></ul>
+        </div>
+
+        <button class="btn-primary humor-spin-button" id="humor-spin-button" type="button">Girar</button>
+      </div>
+    </div>
   </div>
 
   <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-humor">#humor</code></div>

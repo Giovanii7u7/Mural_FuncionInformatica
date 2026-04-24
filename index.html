@@ -206,6 +206,7 @@
 <script src="js/visits.js"></script>
 <script src="js/router.js"></script>
 <script src="js/buzon.js"></script>
+<script src="js/humor.js"></script>
 <script src="js/tutorias.js"></script>
 <script src="js/lightbox.js"></script>
 <script src="js/cumpleanios.js"></script>
@@ -233,6 +234,7 @@
   ).then(() => {
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
+    if (typeof initHumorWheel === 'function') initHumorWheel();
     if (typeof initTutorias  === 'function') initTutorias();
     if (typeof initImageLightbox === 'function') initImageLightbox();
     if (typeof renderBdays   === 'function') renderBdays();

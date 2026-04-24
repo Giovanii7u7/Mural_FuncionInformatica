@@ -7,18 +7,34 @@
   --cream:  #FAF7F2;
   --ink:    #1C1C1C;
   --muted:  #6B6B6B;
+  --muted-strong: #4F5D70;
   --border: rgba(14,35,64,.12);
+  --surface: #FFFFFF;
+  --surface-alt: #F5F7FB;
+  --shadow-soft: 0 16px 40px rgba(9, 25, 48, .08);
   --r: 12px;
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Source Sans 3', sans-serif;
 }
 
 /* ── Reset & Base ──────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   background: var(--cream);
   color: var(--ink);
   min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a, button, input, textarea, select { font: inherit; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -.02em;
 }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }

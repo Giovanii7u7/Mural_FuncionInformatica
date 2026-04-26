@@ -6,21 +6,56 @@ const DEFAULT_AVATARS = {
   mujer: "img/avatar-mujer.svg",
 };
 
-function loadBdays() {
+async function loadBdaysFromSupabase() {
   try {
-    const version = localStorage.getItem("unistmo_bdays_version");
-    const raw = localStorage.getItem("unistmo_bdays");
-    if (version !== BDAY_DATA_VERSION || !raw) {
-      const defaults = defaultBdays();
-      saveBdays(defaults);
-      return defaults;
+    const { data, error } = await supabaseClient
+      .from("birthdays")
+      .select("*")
+      .eq("active", true)
+      .order("birth_month", { ascending: true })
+      .order("birth_day", { ascending: true });
+
+    if (error) {
+      console.error("Error loading birthdays from Supabase:", error);
+      return null;
     }
-    return JSON.parse(raw);
-  } catch {
-    const defaults = defaultBdays();
-    saveBdays(defaults);
-    return defaults;
+    if (!data || data.length === 0) return null;
+
+    const y = new Date().getFullYear();
+    return data.map((b, i) => ({
+      id: b.id,
+      nombre: b.full_name,
+      grupo: b.group_name,
+      fecha: `${y}-${String(b.birth_month).padStart(2, "0")}-${String(b.birth_day).padStart(2, "0")}`,
+      genero: b.gender === "mujer" ? "mujer" : "hombre",
+      avatar: b.photo_url || null,
+      color: AVATAR_COLORS[i % AVATAR_COLORS.length],
+    }));
+  } catch (e) {
+    console.error("Exception loading birthdays:", e);
+    return null;
   }
+}
+
+async function loadBdays() {
+  const cached = localStorage.getItem("unistmo_bdays");
+  const version = localStorage.getItem("unistmo_bdays_version");
+
+  const supabaseData = await loadBdaysFromSupabase();
+  if (supabaseData && supabaseData.length > 0) {
+    saveBdays(supabaseData);
+    return supabaseData;
+  }
+
+  if (version === BDAY_DATA_VERSION && cached) {
+    try {
+      return JSON.parse(cached);
+    } catch {}
+  }
+
+  const defaults = defaultBdays();
+  saveBdays(defaults);
+  return defaults;
 }
 
 function saveBdays(arr) {
@@ -44,7 +79,7 @@ function defaultBdays() {
   ];
 }
 
-let bdayData = loadBdays();
+let bdayData = [];
 const today = new Date();
 let viewMonth = today.getMonth();
 let viewYear = today.getFullYear();
@@ -371,6 +406,7 @@ document.getElementById("nav-cumple") && (() => {
   };
 })();
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
+  bdayData = await loadBdays();
   renderBdays();
 });

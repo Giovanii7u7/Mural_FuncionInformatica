@@ -302,6 +302,237 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   flex-shrink: 0;
 }
 
+.logros-panel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 1rem;
+}
+
+.logros-tab-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: .55rem .95rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--muted-strong);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logros-tab-button.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+
+.logros-tab-panel {
+  display: none;
+}
+
+.logros-tab-panel.active {
+  display: block;
+}
+
+.logros-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logros-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .35rem;
+}
+
+.logros-copy {
+  font-size: 14px;
+  color: var(--muted-strong);
+  line-height: 1.55;
+}
+
+.logros-hero-badge {
+  background: linear-gradient(135deg, #e8f8f0, #f8fcfa);
+  border: 1px solid rgba(29,158,117,.18);
+  color: #127c48;
+  border-radius: 999px;
+  padding: .45rem .8rem;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.logros-top-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.logros-podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(170px, 1fr));
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+.podium-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 14px 30px rgba(9,25,48,.06);
+  text-align: center;
+}
+
+.podium-card.podium-first {
+  border-color: rgba(196,154,60,.35);
+  background: linear-gradient(180deg, #fff9ea 0%, #fffdf6 100%);
+  min-height: 260px;
+  padding-top: 1.35rem;
+}
+
+.podium-card.podium-second {
+  border-color: rgba(140,148,160,.3);
+  min-height: 220px;
+}
+
+.podium-card.podium-third {
+  border-color: rgba(160,103,72,.28);
+  background: linear-gradient(180deg, #fff6f2 0%, #fffdfc 100%);
+  min-height: 200px;
+}
+
+.podium-medal {
+  font-size: 28px;
+  margin-bottom: .85rem;
+}
+
+.podium-card h5 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: .3rem;
+}
+
+.podium-card strong {
+  display: block;
+  margin: .8rem 0 .4rem;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--navy);
+}
+
+.podium-card p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.logros-secondary-list {
+  display: grid;
+  gap: .85rem;
+}
+
+.logros-secondary-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+}
+
+.logros-secondary-item.tie {
+  align-items: start;
+}
+
+.logros-secondary-rank {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.logros-secondary-info h5 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: .2rem;
+}
+
+.logros-secondary-info p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.grupo-promedios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .9rem;
+}
+
+.grupo-promedio-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1rem;
+  background: white;
+}
+
+.grupo-promedio-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .8rem;
+  margin-bottom: .8rem;
+}
+
+.grupo-promedio-head p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.grupo-promedio-card ol {
+  display: grid;
+  gap: .65rem;
+  padding-left: 1.1rem;
+}
+
+.grupo-promedio-card li {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: .75rem;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.grupo-promedio-card li span {
+  line-height: 1.4;
+}
+
+.grupo-promedio-card li strong {
+  color: var(--navy);
+  white-space: nowrap;
+}
+
 /* Eventos */
 .evento-item {
   display: grid;
@@ -800,6 +1031,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
 }
 .red-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
 .red-icon { font-size: 32px; }
+.red-icon img { width: 32px; height: 32px; object-fit: contain; }
 .red-card h5 { font-size: 14px; font-weight: 500; }
 .red-card p { font-size: 12px; color: var(--muted); }
 
@@ -874,6 +1106,57 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
 }
 
 @media (max-width: 640px) {
+  .logros-hero {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .logros-podium {
+    grid-template-columns: 1fr;
+  }
+
+  .podium-card.podium-first {
+    order: 1;
+  }
+
+  .podium-card.podium-first,
+  .podium-card.podium-second,
+  .podium-card.podium-third {
+    min-height: auto;
+  }
+
+  .podium-card.podium-second {
+    order: 2;
+  }
+
+  .podium-card.podium-third {
+    order: 3;
+  }
+
+  .podium-card strong {
+    font-size: 30px;
+  }
+
+  .logros-secondary-item {
+    grid-template-columns: 1fr;
+    gap: .65rem;
+  }
+
+  .logros-secondary-rank {
+    width: 42px;
+    height: 42px;
+  }
+
+  .grupo-promedio-head {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .grupo-promedio-card li {
+    flex-direction: column;
+    gap: .2rem;
+  }
+
   .humor-wheel-layout {
     grid-template-columns: 1fr;
     gap: 1rem;

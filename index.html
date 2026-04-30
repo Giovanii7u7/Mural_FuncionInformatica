@@ -207,6 +207,7 @@
 <script src="js/router.js"></script>
 <script src="js/buzon.js"></script>
 <script src="js/humor.js"></script>
+<script src="js/logros.js"></script>
 <script src="js/tutorias.js"></script>
 <script src="js/lightbox.js"></script>
 <script src="js/cumpleanios.js"></script>
@@ -234,6 +235,7 @@
   ).then(() => {
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
+    if (typeof initLogrosTabs === 'function') initLogrosTabs();
     if (typeof initHumorWheel === 'function') initHumorWheel();
     if (typeof initTutorias  === 'function') initTutorias();
     if (typeof initImageLightbox === 'function') initImageLightbox();

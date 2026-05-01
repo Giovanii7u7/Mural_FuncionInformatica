@@ -1,0 +1,4 @@
+El pasado 6 de marzo del presente año, el equipo del noveno semestre de la licenciatura en Informática e Ingeniería en Desarrollo de Software y Sistemas Inteligentes de la Universidad del Istmo, campus Ixtepec, participó en el "Coloquio de Matemáticas y sus Aplicaciones en el Papaloapan 2026", realizado en la Universidad del Papaloapan, en Loma Bonita, Oaxaca.
+En el evento, el equipo presentó su cartel titulado “Análisis del juego de las canicas rodantes mediante autómatas finitos deterministas y teoría de lenguajes”. Su participación consistió en exponer el análisis y modelado de un sistema mecánico de canicas rodantes mediante autómatas deterministas con salidas llamadas máquinas de mealy.
+Felicitamos a las alumnas y los alumnos por su desempeño y participación en el evento, así como al Dr. Francisco Alejandro González Horta por su guía y acompañamiento.
+#UNISTMO #Informática #EducacióndeCalidad #SEP #Oaxaca

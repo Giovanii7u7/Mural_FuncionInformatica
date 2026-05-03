@@ -1,44 +1,49 @@
 .bday-toolbar {
   display: flex;
   align-items: center;
-  justify-content: center; /* 🔥 cambia esto */
+  justify-content: center;
   margin-bottom: 1.5rem;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
 .bday-month-nav {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center; /* 🔥 centra contenido interno */
-  gap: .75rem;
-  width: 100%; /* 🔥 ocupa todo el ancho */
+  gap: .5rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .4rem .6rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
 
 .bday-month-nav button {
-  background: white;
-  border: 1px solid var(--border);
+  background: var(--navy-light, #EEF2F8);
+  border: none;
   border-radius: 8px;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   display: grid;
   place-items: center;
   transition: all .2s;
-  color: var(--ink);
+  color: var(--navy);
+  font-weight: 700;
 }
 .bday-month-nav button:hover {
   background: var(--navy);
   color: white;
-  border-color: var(--navy);
 }
 .bday-month-title {
   font-family: 'Fraunces', serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  min-width: 160px;
+  min-width: 180px;
   text-align: center;
+  color: var(--navy);
+  letter-spacing: -.02em;
 }
 
 .bday-today-banner {
@@ -275,19 +280,26 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
   cursor: pointer;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: .55rem .95rem;
-  transition: all .2s;
-  margin-bottom: 1rem;
+  background: var(--navy, #0E2340);
+  border: none;
+  border-radius: 10px;
+  padding: .7rem 1.4rem;
+  transition: all .25s;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(14,35,64,.25);
 }
 .birthday-submit-toggle:hover {
-  border-color: var(--sky);
-  color: var(--sky);
+  background: #1a365d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(14,35,64,.35);
+}
+.birthday-submit-toggle:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(14,35,64,.2);
 }
 .birthday-submit-modal-card {
   width: min(480px, 94vw);

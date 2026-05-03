@@ -105,7 +105,7 @@ function getAvatarMarkup(person, altText) {
 
 function renderBdays() {
   const title = document.getElementById("bday-month-title");
-  title.textContent = `${MESES[viewMonth]} ${viewYear}`;
+  title.textContent = `${MESES[viewMonth]}, ${viewYear}`;
 
   const grid = document.getElementById("bday-grid");
   grid.innerHTML = "";

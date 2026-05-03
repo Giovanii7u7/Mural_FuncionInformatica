@@ -27,6 +27,20 @@
   <div class="header-career-badge">
     <img src="logo_Carrera.jpg" alt="Logo de la carrera" class="career-logo"/>
   </div>
+
+  <div class="user-box" id="user-box" onclick="goToLogin()">
+    <div class="user-avatar"></div>
+    <div class="user-info">
+      <span class="user-name">Iniciar sesión</span>
+      <span class="user-role">Invitado</span>
+    </div>
+
+    <!-- 🔴 BOTÓN BURBUJA -->
+    <button id="logout-btn" class="logout-btn" onclick="logout(event)">
+      ✕
+    </button>
+  </div>
+
   <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
@@ -119,7 +133,30 @@
     <h3 id="modal-name"></h3>
     <div class="modal-group" id="modal-group"></div>
     <div class="modal-date" id="modal-date"></div>
+    
+    <!-- RULETA -->
+    <div id="roulette-section" style="display:none;text-align:center;margin:.5rem 0 1rem">
+      <p style="font-size:12px;font-weight:500;color:var(--muted);margin:0 0 .5rem">
+        🎰 Gira la ruleta y descubre tu regalo
+      </p>
+      <div style="position:relative;display:inline-block;margin-bottom:.75rem">
+        <canvas id="roulette-canvas" width="220" height="220"
+          style="display:block;border-radius:50%;border:2px solid #eee"></canvas>
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+          font-size:22px;line-height:1;z-index:10">▼</div>
+      </div>
+      <br>
+      <button onclick="spinRoulette()"
+        style="background:#ff6b9d;color:white;border:none;padding:.5rem 1.5rem;
+        border-radius:99px;font-size:13px;font-weight:500;cursor:pointer">
+        🎰 ¡Girar!
+      </button>
+      <div id="roulette-result"
+        style="margin-top:.6rem;font-size:14px;font-weight:500;color:#333;min-height:20px"></div>
+    </div>
+    <!-- FIN RULETA -->
 
+    <div class="modal-date" id="modal-date"></div>
     <div style="height:1px;background:var(--border);margin:1.25rem 0"></div>
 
     <div style="text-align:left">
@@ -150,14 +187,18 @@
     <h3 style="margin-bottom:.35rem">Agrega tu cumpleaños</h3>
     <p style="font-size:13px;color:var(--muted);margin-bottom:1.25rem">Tu información se enviará para revisión antes de publicarse.</p>
 
-    <div class="form-group" style="text-align:left">
-      <label for="birthday-full-name">Nombre completo</label>
-      <input id="birthday-full-name" type="text" placeholder="Escribe tu nombre completo"/>
-    </div>
-    <div class="form-group" style="text-align:left">
-      <label for="birthday-group">Grupo</label>
-      <input id="birthday-group" type="text" placeholder="Ejemplo: 217, 417, 608, 1008"/>
-    </div>
+    
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" id="nombre" placeholder="Ej: Edgar Javier"/>
+      </div>
+
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Ej: Anonimo55"/>
+      </div>
+
+
     <div class="birthday-date-grid">
       <div class="form-group" style="text-align:left">
         <label for="birthday-day">Día</label>
@@ -238,7 +279,54 @@
     if (typeof initTutorias  === 'function') initTutorias();
     if (typeof initImageLightbox === 'function') initImageLightbox();
     if (typeof renderBdays   === 'function') renderBdays();
+    if (typeof initRoulettePage === 'function') initRoulettePage();
   });
+</script>
+
+<script>
+function loadUser(){
+  const session = localStorage.getItem("session");
+
+  const nameEl = document.querySelector(".user-name");
+  const roleEl = document.querySelector(".user-role");
+  const box = document.getElementById("user-box");
+
+  if(session){
+    const users = JSON.parse(localStorage.getItem("users") || "{}");
+    const user = users[session];
+
+    if(user){
+      nameEl.textContent = user.nombre || "Usuario";
+      roleEl.textContent = user.usuario || "Alumno";
+
+      box.onclick = null;
+
+      box.classList.add("logged");     // ✅ LOGUEADO
+      box.classList.remove("guest");
+
+    } else {
+      localStorage.removeItem("session");
+      loadUser();
+    }
+  } else {
+    nameEl.textContent = "Iniciar sesión";
+    roleEl.textContent = "Invitado";
+    box.onclick = goToLogin;
+
+    box.classList.add("guest");       // ✅ INVITADO
+    box.classList.remove("logged");
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadUser);
+
+function logout(e){
+  e.stopPropagation(); // 🚫 evita que dispare el login
+
+  localStorage.removeItem("session");
+
+  location.reload(); // 🔄 recargar página
+}
 </script>
 
 </body>

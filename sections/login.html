@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login — UNISTMO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/layout.css"/>
+<link rel="stylesheet" href="css/components.css"/>
+
+<style>
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  background:linear-gradient(135deg,#0E2340,#1A5C9E);
+}
+
+.login-card{
+  background:white;
+  border-radius:20px;
+  padding:2rem;
+  width:min(400px,90%);
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  text-align:center;
+}
+
+.login-card h2{
+  font-family:'Fraunces', serif;
+  margin-bottom:.3rem;
+}
+
+.login-card p{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:1.5rem;
+}
+
+.form-group{
+  text-align:left;
+  margin-bottom:1rem;
+}
+
+.form-group label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.form-group input{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.6rem .8rem;
+  margin-top:.3rem;
+  font-size:13px;
+  outline:none;
+}
+
+.form-group input:focus{
+  border-color:var(--navy);
+}
+
+.login-btn-submit{
+  width:100%;
+  margin-top:1rem;
+  background:var(--navy);
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:.7rem;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.login-btn-submit:hover{
+  background:#1A5C9E;
+}
+
+.extra{
+  margin-top:1rem;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.back{
+  margin-top:1rem;
+  display:inline-block;
+  font-size:12px;
+  color:var(--navy);
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+  <h2>Inicio de sesión</h2>
+  <p>Accede con tu matrícula escolar</p>
+
+  <div class="form-group">
+    <label>Matrícula</label>
+    <input type="text" id="matricula" placeholder="Ej: 221234567"/>
+  </div>
+
+  <div class="form-group">
+    <label>Contraseña</label>
+    <input type="password" id="password" placeholder="••••••••"/>
+  </div>
+
+  <button class="login-btn-submit" onclick="login()">
+    Iniciar sesión
+  </button>
+
+  <div class="extra">
+    ¿No tienes cuenta? Regístrate abajo 👇
+  </div>
+
+  <button class="login-btn-submit" style="background:#1D9E75" onclick="register()">
+    Registrarse
+  </button>
+
+  <div class="back" onclick="goBack()">← Volver</div>
+</div>
+
+    <script>
+    // 🔐 BASE DE USUARIOS (localStorage)
+    function getUsers(){
+    return JSON.parse(localStorage.getItem("users") || "{}");
+    }
+
+    function saveUsers(users){
+    localStorage.setItem("users", JSON.stringify(users));
+    }
+
+    // 👤 CREAR USUARIO DE PRUEBA (solo una vez)
+    (function initDefaultUser(){
+    let users = getUsers();
+
+    if(!users["550005"]){
+        users["550005"] = {
+        password: "12345",
+        nombre: "Edgar Javier",
+        usuario: "Anonimo55"
+        };
+        saveUsers(users);
+    }
+    })();
+
+    // 🔙 VOLVER
+    function goBack(){
+    window.location.href = "../index.html";
+    }
+
+    // 🔓 LOGIN
+    function login(){
+    const mat = document.getElementById("matricula").value.trim();
+    const pass = document.getElementById("password").value.trim();
+
+    const users = getUsers();
+
+    if(!users[mat]){
+        alert("Usuario no encontrado");
+        return;
+    }
+
+    if(users[mat].password !== pass){
+        alert("Contraseña incorrecta");
+        return;
+    }
+
+    // guardar sesión
+    localStorage.setItem("session", mat);
+
+    alert("Bienvenido " + mat);
+    window.location.href = "../index.html";
+    }
+
+    // 📝 REGISTRO
+    function register(){
+        const mat = document.getElementById("matricula").value.trim();
+        const pass = document.getElementById("password").value.trim();
+        const nombre = document.getElementById("nombre").value.trim();
+        const usuario = document.getElementById("usuario").value.trim();
+
+        if(!mat || !pass || !nombre || !usuario){
+            alert("Completa todos los campos");
+            return;
+        }
+
+        let users = getUsers();
+
+        if(users[mat]){
+            alert("Ese usuario ya existe");
+            return;
+        }
+
+        users[mat] = {
+            matricula: mat,
+            password: pass,
+            nombre: nombre,
+            usuario: usuario
+        };
+
+        saveUsers(users);
+
+        alert("Registrado correctamente");
+        }
+    </script>   
+
+</body>
+</html>

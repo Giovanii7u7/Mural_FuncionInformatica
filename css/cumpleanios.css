@@ -1,16 +1,20 @@
 .bday-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* 🔥 cambia esto */
   margin-bottom: 1.5rem;
   gap: 1rem;
   flex-wrap: wrap;
 }
+
 .bday-month-nav {
   display: flex;
   align-items: center;
+  justify-content: center; /* 🔥 centra contenido interno */
   gap: .75rem;
+  width: 100%; /* 🔥 ocupa todo el ancho */
 }
+
 .bday-month-nav button {
   background: white;
   border: 1px solid var(--border);
@@ -73,10 +77,14 @@
 
 .bday-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, 150px);
+  justify-content: center;
   gap: .85rem;
   margin-bottom: 1rem;
+  width: 100%;        /* ← asegura que ocupa el ancho del padre */
+  box-sizing: border-box;
 }
+
 .bday-card {
   background: white;
   border: 1px solid var(--border);
@@ -87,6 +95,9 @@
   transition: all .25s;
   position: relative;
   overflow: hidden;
+
+  width: 150px;
+
 }
 .bday-card:hover {
   transform: translateY(-3px);
@@ -290,4 +301,168 @@
   .birthday-date-grid {
     grid-template-columns: 1fr;
   }
+}
+
+#page-cumple .page-header div {
+  text-align: center;
+}
+
+#page-cumple .page-header {
+  justify-content: center;
+  text-align: center;
+}
+
+#page-cumple .page-header p {
+  max-width: 100%;
+}
+
+
+.bday-card.is-next {
+  border: 2px solid #4CAF50;
+  background: #f1fff5;
+  transform: scale(1.05);
+}
+
+.bday-card.is-next::after {
+  content: 'PRÓXIMO';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #4CAF50;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 100px;
+}
+
+.page-section {
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+}
+
+.breadcrumb-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: -25px; /* mueve todo hacia arriba */
+  padding-right: 1px; /* empuja hacia la derecha */
+}
+.login-btn{
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: .5rem 1.2rem;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.login-btn:hover{
+  background: #1A5C9E;
+  transform: scale(1.05);
+}
+
+.login-btn-submit{
+  width:100%;
+  margin-top:1rem;
+  background:#1D9E75; /* ← VERDE BONITO */
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:.7rem;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.login-btn-submit:hover{
+  background:#157a5c;
+}
+
+
+.user-box{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  
+  cursor:pointer;
+
+  position: absolute;
+  right: 40px; /* 👈 mueve TODO (icono + texto) */
+  top: 50%;
+  transform: translateY(-50%);
+
+
+}
+
+.user-avatar{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#ccc;
+}
+
+.user-info{
+  display:flex;
+  flex-direction:column;
+  font-size:12px;
+  line-height:1.1;
+  margin-left: 10px;
+}
+
+
+.header-career-badge{
+  position: absolute;
+  right: 150px; /* 👈 ajusta según donde lo quieras */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+/* ===== INVITADO ===== */
+.user-box.guest .user-name{
+  position: relative;
+  left: -10px; /* mueve "Iniciar sesión" */
+}
+
+.user-box.guest .user-role{
+  position: relative;
+  left: -10px; /* mueve "Invitado" */
+}
+
+.user-box.guest{
+  position: absolute;
+  right: 30px;  /* posición cuando NO hay sesión */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+
+
+/* ===== LOGUEADO ===== */
+.user-box.logged .user-name{
+  position: relative;
+  left: -10px; /* mueve "Usuario" */
+}
+
+.user-box.logged .user-role{
+  position: relative;
+  left: -10px; /* mueve "Alumno" */
+}
+
+.user-box.logged{
+  position: absolute;
+  right: 58px;  /* 👈 diferente posición cuando inicia sesión */
+  top: 50%;
+  transform: translateY(-50%);
 }

@@ -145,6 +145,7 @@ function renderBdays() {
     const dayNum = d.getDate();
     const card = document.createElement("div");
     card.className = "bday-card" + (isToday ? " is-today" : "");
+    card.dataset.nombre = b.nombre;
     card.innerHTML = `
       <div class="bday-avatar bday-avatar-photo" style="background:${b.color}">${getAvatarMarkup(b, b.nombre)}</div>
       <h5>${b.nombre}</h5>
@@ -154,18 +155,24 @@ function renderBdays() {
     card.onclick = () => openBdayModal(b, isToday);
     grid.appendChild(card);
   });
+
+  highlightNextBirthday(bdayData);
+
 }
 
 function changeMonth(dir) {
   viewMonth += dir;
+
   if (viewMonth > 11) {
     viewMonth = 0;
     viewYear++;
   }
+
   if (viewMonth < 0) {
     viewMonth = 11;
     viewYear--;
   }
+
   renderBdays();
 }
 
@@ -239,6 +246,9 @@ function submitComment() {
   launchConfetti();
 }
 
+
+
+
 function openBdayModal(b, isToday) {
   currentBdayId = b.id;
   const d = new Date(b.fecha + "T12:00:00");
@@ -258,7 +268,28 @@ function openBdayModal(b, isToday) {
   document.getElementById("bday-modal").classList.add("open");
 
   if (isToday) launchConfetti();
+
+  // 🎰 MODIFICADO: Mostrar ruleta SIEMPRE
+ 
+  const result = document.getElementById("roulette-result");
+  const session = localStorage.getItem("session");
+  const roulette = document.getElementById("roulette-section");
+
+  if(session){
+    roulette.style.display = "block";
+  } else {
+    roulette.style.display = "none";
+  }
+
+  rouletteAngle = 0;
+  rouletteSpinning = false;
+  setTimeout(() => drawRoulette(0), 50); // pequeño delay para que el canvas sea visible
+  document.getElementById("roulette-result").textContent = "";
+
+  result.textContent = "";
 }
+
+
 
 function closeBdayModal(e) {
   if (!e || e.target === document.getElementById("bday-modal") || e.currentTarget.tagName === "BUTTON") {
@@ -402,11 +433,231 @@ document.getElementById("nav-cumple") && (() => {
   const orig = window.showSection;
   window.showSection = function(id, sub) {
     orig(id, sub);
-    if (id === "cumple") renderBdays();
+    if (id === "cumple") highlightNextBirthday(bdayData);;
   };
 })();
 
 window.addEventListener("DOMContentLoaded", async () => {
   bdayData = await loadBdays();
-  renderBdays();
+  renderBdays(); 
+  highlightNextBirthday(bdayData);
 });
+
+function highlightNextBirthday(bdays) {
+  const today = new Date();
+
+  let closest = null;
+  let minDiff = Infinity;
+
+  bdays.forEach(b => {
+    const date = new Date(b.fecha + "T12:00:00");
+
+    // Crear próxima fecha de cumpleaños
+    let nextDate = new Date(today.getFullYear(), date.getMonth(), date.getDate());
+
+    // Si ya pasó este año → usar el siguiente
+    if (nextDate < today) {
+      nextDate.setFullYear(today.getFullYear() + 1);
+    }
+
+    const diff = nextDate - today;
+
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = b;
+    }
+  });
+
+  // limpiar anteriores
+  document.querySelectorAll('.bday-card').forEach(card => {
+    card.classList.remove('is-next');
+  });
+
+  // marcar el próximo
+  if (closest) {
+    document.querySelectorAll('.bday-card').forEach(card => {
+      if (card.dataset.nombre === closest.nombre) {
+        card.classList.add('is-next');
+      }
+    });
+  }
+}
+
+const ROULETTE_PRIZES = [
+  { label: "Takis",    emoji: "🥵", color: "#D85A30" },
+  { label: "Torta",    emoji: "🥪", color: "#1D9E75" },
+  { label: "Coca Cola",emoji: "🥤", color: "#E24B4A" },
+  { label: "Nada",     emoji: "😢", color: "#888780" },
+];
+
+let rouletteAngle = 0;
+let rouletteSpinning = false;
+
+function drawRoulette(rot) {
+  const cvs = document.getElementById("roulette-canvas");
+  if (!cvs) return;
+  const ctx = cvs.getContext("2d");
+  const n = ROULETTE_PRIZES.length;
+  const arc = (Math.PI * 2) / n;
+  const cx = cvs.width / 2, cy = cvs.height / 2, r = cx - 5;
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
+  ROULETTE_PRIZES.forEach((p, i) => {
+    const start = rot + arc * i - Math.PI / 2;
+    const end = start + arc;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,0.4)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(start + arc / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 11px sans-serif";
+    ctx.fillText(p.label, r - 8, 4);
+    ctx.restore();
+  });
+  ctx.beginPath();
+  ctx.arc(cx, cy, 15, 0, Math.PI * 2);
+  ctx.fillStyle = "#fff";
+  ctx.fill();
+}
+
+function spinRoulette() {
+  if (rouletteSpinning) return;
+  rouletteSpinning = true;
+  document.getElementById("roulette-result").textContent = "";
+  const n = ROULETTE_PRIZES.length;
+  const arc = (Math.PI * 2) / n;
+  const winner = Math.floor(Math.random() * n);
+  const extraSpins = 5 + Math.floor(Math.random() * 4);
+  const targetAngle = rouletteAngle + Math.PI * 2 * extraSpins + (Math.PI * 2 - winner * arc);
+  const duration = 4000;
+  const startTime = performance.now();
+  const startAngle = rouletteAngle;
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function frame(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+    rouletteAngle = startAngle + (targetAngle - startAngle) * easeOut(t);
+    drawRoulette(rouletteAngle);
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      rouletteSpinning = false;
+      const p = ROULETTE_PRIZES[winner];
+      document.getElementById("roulette-result").textContent = `${p.emoji} ¡${p.label}!`;
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function goToLogin(){
+  window.location.href = location.origin + "/sections/login.html";
+}
+
+function initRoulettePage(){
+  const session = localStorage.getItem("session");
+
+  const section = document.getElementById("roulette-section-page");
+  const userMsg = document.getElementById("roulette-user-msg");
+  const loginMsg = document.getElementById("login-msg");
+
+  if(session){
+    // 👤 Usuario logueado
+    section.style.display = "block";
+    userMsg.style.display = "block";
+    loginMsg.style.display = "none";
+
+    setTimeout(() => drawRoulettePage(0), 100);
+
+  } else {
+    // 🚫 Invitado
+    section.style.display = "none";
+    userMsg.style.display = "none";
+    loginMsg.style.display = "block";
+  }
+}
+
+let rouletteAnglePage = 0;
+let rouletteSpinningPage = false;
+
+function drawRoulettePage(rot) {
+  const cvs = document.getElementById("roulette-canvas-page");
+  if (!cvs) return;
+
+  const ctx = cvs.getContext("2d");
+  const n = ROULETTE_PRIZES.length;
+  const arc = (Math.PI * 2) / n;
+  const cx = cvs.width / 2, cy = cvs.height / 2, r = cx - 5;
+
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+  ROULETTE_PRIZES.forEach((p, i) => {
+    const start = rot + arc * i - Math.PI / 2;
+    const end = start + arc;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,0.4)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(start + arc / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 11px sans-serif";
+    ctx.fillText(p.label, r - 8, 4);
+    ctx.restore();
+  });
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, 15, 0, Math.PI * 2);
+  ctx.fillStyle = "#fff";
+  ctx.fill();
+}
+
+function spinRoulettePage() {
+  if (rouletteSpinningPage) return;
+
+  rouletteSpinningPage = true;
+  document.getElementById("roulette-result-page").textContent = "";
+
+  const n = ROULETTE_PRIZES.length;
+  const arc = (Math.PI * 2) / n;
+  const winner = Math.floor(Math.random() * n);
+
+  const extraSpins = 5 + Math.floor(Math.random() * 4);
+  const targetAngle = rouletteAnglePage + Math.PI * 2 * extraSpins + (Math.PI * 2 - winner * arc);
+
+  const duration = 4000;
+  const startTime = performance.now();
+  const startAngle = rouletteAnglePage;
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function frame(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+
+    rouletteAnglePage = startAngle + (targetAngle - startAngle) * easeOut(t);
+    drawRoulettePage(rouletteAnglePage);
+
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      rouletteSpinningPage = false;
+      const p = ROULETTE_PRIZES[winner];
+      document.getElementById("roulette-result-page").textContent = `${p.emoji} ¡${p.label}!`;
+    }
+  }
+
+  requestAnimationFrame(frame);
+}

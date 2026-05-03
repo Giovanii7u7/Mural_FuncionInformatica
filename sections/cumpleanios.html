@@ -1,7 +1,12 @@
 <section class="page-section" id="page-cumple">
-  <div class="breadcrumb">
-    <span onclick="showHome()">Inicio</span> › Cumpleaños del Mes
+  
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">
+      <span onclick="showHome()">Inicio</span> › Cumpleaños del Mes
+    </div>
+  
   </div>
+
   <div class="page-header">
     <div class="page-header-icon" style="background:#fff0f5">🎂</div>
     <div>
@@ -10,7 +15,7 @@
     </div>
   </div>
 
-  <button class="birthday-submit-toggle" onclick="openBirthdaySubmitModal()">🎉 Agrega tu cumpleaños</button>
+  
 
   <div class="bday-today-banner hidden" id="bday-today-banner">
     <div>
@@ -18,16 +23,81 @@
       <p>Haz clic en su tarjeta para mandarle una felicitación 🎉</p>
     </div>
   </div>
+  
+  
+    <div class="bday-toolbar">
+      <div class="bday-month-nav">
+        <button onclick="changeMonth(-1)">‹</button>
+        <div class="bday-month-title" id="bday-month-title">Marzo 2025</div>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+    </div>
 
-  <div class="bday-toolbar">
-    <div class="bday-month-nav">
-      <button onclick="changeMonth(-1)">‹</button>
-      <div class="bday-month-title" id="bday-month-title">Marzo 2025</div>
-      <button onclick="changeMonth(1)">›</button>
+    <div class="bday-grid" id="bday-grid"></div>
+  <center>
+    <button class="birthday-submit-toggle" onclick="openBirthdaySubmitModal()">🎉 Agrega tu cumpleaños</button>
+  </center>
+
+
+  <!-- MODAL AGREGAR CUMPLEAÑOS -->
+  <div class="bday-modal-overlay" id="birthday-submit-modal" onclick="closeBirthdaySubmitModal(event)">
+    <div class="bday-modal">
+      <button class="bday-modal-close" onclick="closeBirthdaySubmitModal()">✕</button>
+
+      <h3>🎉 Agregar cumpleaños</h3>
+
+      <input id="birthday-full-name" type="text" placeholder="Nombre completo">
+      <input id="birthday-group" type="text" placeholder="Grupo">
+      
+      <input id="birthday-day" type="number" placeholder="Día (1-31)">
+      <input id="birthday-month" type="number" placeholder="Mes (1-12)">
+
+      <div id="birthday-submit-error" style="color:red;display:none;"></div>
+      <div id="birthday-submit-success" style="color:green;display:none;">
+        ✔ Enviado correctamente
+      </div>
+
+      <button id="birthday-submit-button" onclick="submitBirthdayRequest()">
+        Enviar para revisión →
+      </button>
     </div>
   </div>
 
-  <div class="bday-grid" id="bday-grid"></div>
+  <!-- MENSAJE USUARIO -->
+  <div id="roulette-user-msg" style="display:none;text-align:center;margin-top:1rem">
+    <h3 style="margin:0;font-weight:700;color:#1D9E75">
+      🎉 Muchas felicidades, escoge tu premio
+    </h3>
+  </div>
+
+  <!-- 🎰 RULETA (SOLO USUARIO) -->
+  <div id="roulette-section-page" style="display:none;text-align:center;margin:1rem 0">    
+    <br>
+    <div style="position:relative;display:inline-block;margin-bottom:.75rem">
+      <canvas id="roulette-canvas-page" width="220" height="220"
+        style="display:block;border-radius:50%;border:2px solid #eee"></canvas>
+      <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+        font-size:22px;line-height:1;z-index:10">▼</div>
+    </div>
+
+    <br>
+
+    <button onclick="spinRoulettePage()"
+      style="background:#ff6b9d;color:white;border:none;padding:.5rem 1.5rem;
+      border-radius:99px;font-size:13px;font-weight:500;cursor:pointer">
+      🎰 ¡Girar!
+    </button>
+
+    <div id="roulette-result-page"
+      style="margin-top:.6rem;font-size:14px;font-weight:500;color:#333;min-height:20px"></div>
+  </div>
+
+  <!-- MENSAJE LOGIN -->
+  <div id="login-msg" style="display:none;text-align:center;margin:1rem 0">
+    <p style="font-size:14px;font-weight:600;color:#C49A3C">
+      🔒 Para recibir tu premio inicia sesión
+    </p>
+  </div>
 
   <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-cumple">#cumple</code></div>
 </section>

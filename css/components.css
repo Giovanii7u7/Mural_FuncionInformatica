@@ -926,3 +926,30 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
     min-width: 100%;
   }
 }
+
+.user-box{
+  position: relative;
+}
+
+/* 🔴 BURBUJA */
+.logout-btn{
+  position: absolute;
+  top: -1px;
+  right: -20px; 
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: #e53935;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  display: none; /* 👈 oculto por defecto */
+  align-items: center;
+  justify-content: center;
+}
+
+/* 👇 SOLO aparece al pasar el mouse */
+.user-box:hover .logout-btn{
+  display: flex;
+}

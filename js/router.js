@@ -11,6 +11,45 @@ function showHome() {
   if (typeof trackPageView === 'function') trackPageView('home');
 }
 
+
+
+function showSection(id, sub = null) {
+
+  console.log("Mostrando sección:", id);
+
+  hideAll();
+
+  const section = document.getElementById('page-' + id);
+
+  if (!section) {
+    console.warn('⚠️ Sección no existe:', id);
+    return;
+  }
+
+  section.classList.add('active');
+  setNavActive('nav-' + id);
+  closeSidebar();
+
+  const hash = sub ? id + '/' + sub : id;
+  history.pushState(null, '', '#' + hash);
+
+  updateQRUrls();
+
+  if (typeof trackPageView === 'function') trackPageView(id);
+
+  if (sub) {
+    setTimeout(() => {
+      const el = document.getElementById('sub-' + sub);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+
+
+/*
 function showSection(id, sub = null) {
   hideAll();
   document.getElementById('page-' + id).classList.add('active');
@@ -29,6 +68,7 @@ function showSection(id, sub = null) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
+*/
 
 function hideAll() {
   document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
@@ -61,7 +101,10 @@ function routeFromHash() {
 }
 
 window.addEventListener('hashchange', routeFromHash);
+
+/*
 window.addEventListener('DOMContentLoaded', () => {
   routeFromHash();
   updateQRUrls();
 });
+*/

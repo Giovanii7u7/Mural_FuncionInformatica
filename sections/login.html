@@ -6,7 +6,7 @@
 <title>Login — UNISTMO</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 
 <link rel="stylesheet" href="css/base.css"/>
 <link rel="stylesheet" href="css/layout.css"/>
@@ -17,84 +17,158 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  height:100vh;
-  background:linear-gradient(135deg,#0E2340,#1A5C9E);
+  min-height:100vh;
+  background:linear-gradient(160deg,#0E2340 0%,#1A5C9E 50%,#3B8BD4 100%);
+  padding:1.5rem;
 }
 
 .login-card{
   background:white;
-  border-radius:20px;
-  padding:2rem;
-  width:min(400px,90%);
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  border-radius:24px;
+  padding:2.5rem 2.5rem 2rem;
+  width:min(440px,92%);
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
   text-align:center;
+  animation: fadeUp .4s ease;
+}
+
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(20px) }
+  to{ opacity:1; transform:translateY(0) }
 }
 
 .login-card h2{
   font-family:'Fraunces', serif;
-  margin-bottom:.3rem;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:.4rem;
 }
 
-.login-card p{
-  font-size:13px;
+.login-card .subtitle{
+  font-family:'DM Sans', sans-serif;
+  font-size:14px;
   color:var(--muted);
-  margin-bottom:1.5rem;
+  margin-bottom:2rem;
+  font-weight:400;
 }
 
 .form-group{
   text-align:left;
-  margin-bottom:1rem;
+  margin-bottom:1.2rem;
 }
 
 .form-group label{
-  font-size:12px;
-  font-weight:600;
+  font-family:'DM Sans', sans-serif;
+  font-size:13px;
+  font-weight:500;
   color:var(--ink);
+  display:block;
+  margin-bottom:.4rem;
 }
 
 .form-group input{
   width:100%;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:.6rem .8rem;
-  margin-top:.3rem;
-  font-size:13px;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:.75rem 1rem;
+  font-size:14px;
+  font-family:'DM Sans', sans-serif;
   outline:none;
+  transition:all .2s;
+  background:#fafafa;
 }
 
 .form-group input:focus{
   border-color:var(--navy);
+  background:white;
+  box-shadow:0 0 0 3px rgba(14,35,64,.1);
 }
 
-.login-btn-submit{
+.form-group input::placeholder{
+  color:#aaa;
+}
+
+.btn-primary-login{
   width:100%;
-  margin-top:1rem;
-  background:var(--navy);
+  margin-top:1.5rem;
+  background:#0E2340;
   color:white;
   border:none;
-  border-radius:10px;
-  padding:.7rem;
-  font-size:14px;
+  border-radius:12px;
+  padding:.85rem;
+  font-size:15px;
+  font-weight:600;
+  font-family:'DM Sans', sans-serif;
   cursor:pointer;
-  transition:.2s;
+  transition:all .25s;
+  box-shadow:0 2px 8px rgba(14,35,64,.25);
 }
 
-.login-btn-submit:hover{
-  background:#1A5C9E;
+.btn-primary-login:hover{
+  background:#1a365d;
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(14,35,64,.35);
+}
+
+.btn-primary-login:active{
+  transform:translateY(0);
 }
 
 .extra{
-  margin-top:1rem;
-  font-size:12px;
+  margin-top:1.5rem;
+  font-size:13px;
   color:var(--muted);
+  font-family:'DM Sans', sans-serif;
+}
+
+.btn-secondary-login{
+  display:inline-block;
+  margin-top:.75rem;
+  padding:.7rem 1.5rem;
+  background:transparent;
+  color:var(--navy);
+  border:1.5px solid var(--navy);
+  border-radius:12px;
+  font-size:14px;
+  font-weight:500;
+  font-family:'DM Sans', sans-serif;
+  cursor:pointer;
+  transition:all .25s;
+}
+
+.btn-secondary-login:hover{
+  background:var(--navy);
+  color:white;
 }
 
 .back{
-  margin-top:1rem;
+  margin-top:1.2rem;
   display:inline-block;
-  font-size:12px;
-  color:var(--navy);
+  font-size:13px;
+  color:rgba(255,255,255,.8);
   cursor:pointer;
+  transition:color .2s;
+  font-family:'DM Sans', sans-serif;
+}
+.back:hover{
+  color:white;
+}
+
+@media(max-width:480px){
+  .login-card{
+    padding:2rem 1.5rem 1.5rem;
+    border-radius:20px;
+  }
+  .login-card h2{
+    font-size:1.4rem;
+  }
+  .form-group input{
+    padding:.65rem .85rem;
+  }
+  .btn-primary-login{
+    padding:.75rem;
+  }
 }
 </style>
 </head>
@@ -102,8 +176,8 @@ body{
 <body>
 
 <div class="login-card">
-  <h2>Inicio de sesión</h2>
-  <p>Accede con tu matrícula escolar</p>
+  <h2>Iniciar sesión</h2>
+  <p class="subtitle">Accede con tu matrícula escolar</p>
 
   <div class="form-group">
     <label>Matrícula</label>
@@ -115,105 +189,121 @@ body{
     <input type="password" id="password" placeholder="••••••••"/>
   </div>
 
-  <button class="login-btn-submit" onclick="login()">
+  <button class="btn-primary-login" onclick="login()">
     Iniciar sesión
   </button>
 
   <div class="extra">
-    ¿No tienes cuenta? Regístrate abajo 👇
+    ¿No tienes cuenta?
   </div>
 
-  <button class="login-btn-submit" style="background:#1D9E75" onclick="register()">
+  <button class="btn-secondary-login" onclick="showRegister()">
     Registrarse
   </button>
 
-  <div class="back" onclick="goBack()">← Volver</div>
+  <div class="form-group" id="register-fields" style="display:none;margin-top:1.5rem">
+    <label>Nombre completo</label>
+    <input type="text" id="nombre" placeholder="Tu nombre"/>
+    <label style="margin-top:.8rem">Usuario</label>
+    <input type="text" id="usuario" placeholder="Nombre de usuario"/>
+    <button class="btn-primary-login" onclick="register()" style="margin-top:1rem">
+      Crear cuenta
+    </button>
+  </div>
 </div>
 
-    <script>
-    // 🔐 BASE DE USUARIOS (localStorage)
-    function getUsers(){
-    return JSON.parse(localStorage.getItem("users") || "{}");
-    }
+<div class="back" onclick="goBack()">← Volver al inicio</div>
 
-    function saveUsers(users){
-    localStorage.setItem("users", JSON.stringify(users));
-    }
+<script>
+// 🔐 BASE DE USUARIOS (localStorage)
+function getUsers(){
+  return JSON.parse(localStorage.getItem("users") || "{}");
+}
 
-    // 👤 CREAR USUARIO DE PRUEBA (solo una vez)
-    (function initDefaultUser(){
-    let users = getUsers();
+function saveUsers(users){
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-    if(!users["550005"]){
-        users["550005"] = {
-        password: "12345",
-        nombre: "Edgar Javier",
-        usuario: "Anonimo55"
-        };
-        saveUsers(users);
-    }
-    })();
+// 👤 CREAR USUARIO DE PRUEBA (solo una vez)
+(function initDefaultUser(){
+  let users = getUsers();
+  if(!users["550005"]){
+    users["550005"] = {
+      password: "12345",
+      nombre: "Edgar Javier",
+      usuario: "Anonimo55"
+    };
+    saveUsers(users);
+  }
+})();
 
-    // 🔙 VOLVER
-    function goBack(){
-    window.location.href = "../index.html";
-    }
+// 🔙 VOLVER
+function goBack(){
+  window.location.href = "../index.html";
+}
 
-    // 🔓 LOGIN
-    function login(){
-    const mat = document.getElementById("matricula").value.trim();
-    const pass = document.getElementById("password").value.trim();
+// 🔓 LOGIN
+function login(){
+  const mat = document.getElementById("matricula").value.trim();
+  const pass = document.getElementById("password").value.trim();
 
-    const users = getUsers();
+  const users = getUsers();
 
-    if(!users[mat]){
-        alert("Usuario no encontrado");
-        return;
-    }
+  if(!users[mat]){
+    alert("Usuario no encontrado");
+    return;
+  }
 
-    if(users[mat].password !== pass){
-        alert("Contraseña incorrecta");
-        return;
-    }
+  if(users[mat].password !== pass){
+    alert("Contraseña incorrecta");
+    return;
+  }
 
-    // guardar sesión
-    localStorage.setItem("session", mat);
+  localStorage.setItem("session", mat);
+  alert("Bienvenido " + users[mat].nombre);
+  window.location.href = "../index.html";
+}
 
-    alert("Bienvenido " + mat);
-    window.location.href = "../index.html";
-    }
+// 📝 MOSTRAR CAMPOS DE REGISTRO
+function showRegister(){
+  document.getElementById("register-fields").style.display = "block";
+  document.querySelector(".extra").style.display = "none";
+  document.querySelector(".btn-secondary-login").style.display = "none";
+}
 
-    // 📝 REGISTRO
-    function register(){
-        const mat = document.getElementById("matricula").value.trim();
-        const pass = document.getElementById("password").value.trim();
-        const nombre = document.getElementById("nombre").value.trim();
-        const usuario = document.getElementById("usuario").value.trim();
+// 📝 REGISTRO
+function register(){
+  const mat = document.getElementById("matricula").value.trim();
+  const pass = document.getElementById("password").value.trim();
+  const nombre = document.getElementById("nombre").value.trim();
+  const usuario = document.getElementById("usuario").value.trim();
 
-        if(!mat || !pass || !nombre || !usuario){
-            alert("Completa todos los campos");
-            return;
-        }
+  if(!mat || !pass || !nombre || !usuario){
+    alert("Completa todos los campos");
+    return;
+  }
 
-        let users = getUsers();
+  let users = getUsers();
 
-        if(users[mat]){
-            alert("Ese usuario ya existe");
-            return;
-        }
+  if(users[mat]){
+    alert("Ese usuario ya existe");
+    return;
+  }
 
-        users[mat] = {
-            matricula: mat,
-            password: pass,
-            nombre: nombre,
-            usuario: usuario
-        };
+  users[mat] = {
+    matricula: mat,
+    password: pass,
+    nombre: nombre,
+    usuario: usuario
+  };
 
-        saveUsers(users);
-
-        alert("Registrado correctamente");
-        }
-    </script>   
+  saveUsers(users);
+  alert("Registrado correctamente");
+  document.getElementById("register-fields").style.display = "none";
+  document.querySelector(".extra").style.display = "block";
+  document.querySelector(".btn-secondary-login").style.display = "inline-block";
+}
+</script>
 
 </body>
 </html>

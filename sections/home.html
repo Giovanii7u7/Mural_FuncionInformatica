@@ -1,13 +1,67 @@
-<!-- ── HOME ──────────────────────────────── -->
+<!-- HOME -->
 <section class="page-section active" id="page-home">
   <div class="hero">
-    <div class="hero-eyebrow">Licenciaturas en Informática · DSyS</div>
-    <h1>Periódico Mural <em>Digital</em></h1>
-    <p>Tu espacio de información académica, noticias y comunidad. Escanea el QR de cualquier sección del tablón para llegar directamente aquí.</p>
+    <div class="hero-eyebrow">Licenciaturas en Informatica · DSyS</div>
+    <h1>Periodico Mural <em>Digital</em></h1>
+    <p>Tu espacio de informacion academica, noticias y comunidad. Escanea el QR de cualquier seccion del tablon para llegar directamente aqui.</p>
     <div class="hero-chips">
-      <span class="chip">📍 Campus Ixtepec</span>
-      <span class="chip">🎓 UNISTMO</span>
-      <span class="chip">📱 Acceso por QR</span>
+      <span class="chip">Campus Ixtepec</span>
+      <span class="chip">UNISTMO</span>
+      <span class="chip">Acceso por QR</span>
+    </div>
+  </div>
+
+  <div class="home-updates">
+    <div class="home-updates-head">
+      <div>
+        <div class="home-updates-eyebrow">Portada viva</div>
+        <h2>Ultimas actualizaciones</h2>
+        <p>Lo mas reciente del mural para ubicar rapido que cambio en noticias, cultura y logros.</p>
+      </div>
+      <button class="home-updates-cta" type="button" onclick="showSection('noticias')">Ver novedades →</button>
+    </div>
+
+    <div class="home-updates-grid">
+      <article class="home-update-card" onclick="showSection('logros')" style="--update-accent:#1D9E75;--update-soft:#E8F8F0">
+        <div class="home-update-badge">Nuevo en Logros</div>
+        <div class="home-update-stat">
+          <span class="home-update-stat-label">Top actual</span>
+          <strong>9.7</strong>
+          <span class="home-update-stat-note">Primer parcial 2025-2026B</span>
+        </div>
+        <h3>Resultados del primer parcial 2025-2026B</h3>
+        <p>Ya esta visible el nuevo top general, junto con los mejores promedios por grupo y el historico anterior.</p>
+        <div class="home-update-meta">
+          <span class="home-update-tag">Promedios</span>
+          <span class="home-update-link">Ir a Logros →</span>
+        </div>
+      </article>
+
+      <article class="home-update-card" onclick="showSection('cultura')" style="--update-accent:#E8943A;--update-soft:#FFF4E8">
+        <div class="home-update-badge">Nuevo en Cultura</div>
+        <div class="home-update-media">
+          <img src="noticia-lectura/joven_leyendo.jpeg" alt="Vista previa de la actividad cultural de lectura en biblioteca"/>
+        </div>
+        <h3>La lectura como experiencia cultural</h3>
+        <p>Se integro la actividad por el Dia Internacional del Libro con galeria y enfoque cultural desde biblioteca.</p>
+        <div class="home-update-meta">
+          <span class="home-update-tag">Biblioteca</span>
+          <span class="home-update-link">Ir a Cultura →</span>
+        </div>
+      </article>
+
+      <article class="home-update-card" onclick="showSection('noticias')" style="--update-accent:#3B8BD4;--update-soft:#EDF4FF">
+        <div class="home-update-badge">Nuevo en Noticias</div>
+        <div class="home-update-media">
+          <img src="noticias/noticia-tarjeta-joven/todos_conferencia.jpeg" alt="Vista previa de la noticia Tarjeta Joven 2026"/>
+        </div>
+        <h3>Convocatoria Tarjeta Joven 2026</h3>
+        <p>La portada de noticias ya incluye esta cobertura reciente y ahora la seccion se organiza con paginacion interna.</p>
+        <div class="home-update-meta">
+          <span class="home-update-tag">Vinculacion</span>
+          <span class="home-update-link">Ir a Noticias →</span>
+        </div>
+      </article>
     </div>
   </div>
 
@@ -32,13 +86,13 @@
     </div>
     <div class="section-card" style="--card-color:#D4537E;--card-bg:#FDF0F8" onclick="showSection('opinion')">
       <div class="card-icon">💬</div>
-      <h3>Opinión</h3>
+      <h3>Opinion</h3>
       <p>Comentarios, sugerencias y reflexiones de la comunidad.</p>
       <div class="card-arrow">→</div>
     </div>
     <div class="section-card" style="--card-color:#3B8BD4;--card-bg:#EDF4FF" onclick="showSection('academica')">
       <div class="card-icon">📚</div>
-      <h3>Sección Académica</h3>
+      <h3>Seccion Academica</h3>
       <p>Horarios, maestros, calendario y recursos de estudio.</p>
       <div class="card-arrow">→</div>
     </div>
@@ -56,14 +110,14 @@
     </div>
     <div class="section-card" style="--card-color:#ff6b9d;--card-bg:#fff0f5" onclick="showSection('cumple')">
       <div class="card-icon">🎂</div>
-      <h3>Cumpleaños del Mes</h3>
-      <p>Celebra a tus compañeros. ¡Cada quién merece su momento!</p>
+      <h3>Cumpleanos del Mes</h3>
+      <p>Celebra a tus companeros. Cada quien merece su momento.</p>
       <div class="card-arrow">→</div>
     </div>
     <div class="section-card" style="--card-color:#0E2340;--card-bg:#EEF2F8" onclick="showSection('redes')">
       <div class="card-icon">🌐</div>
       <h3>Redes Sociales</h3>
-      <p>Síguenos y mantente conectado con la comunidad.</p>
+      <p>Siguenos y mantente conectado con la comunidad.</p>
       <div class="card-arrow">→</div>
     </div>
   </div>

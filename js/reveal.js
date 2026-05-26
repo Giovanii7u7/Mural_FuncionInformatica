@@ -1,8 +1,10 @@
 const revealTargetSelectors = [
   ".page-section.active .breadcrumb",
   ".page-section.active .page-header",
+  ".page-section.active .section-hero",
   ".page-section.active .hero",
   ".page-section.active .home-updates",
+  ".page-section.active .home-sections-intro",
   ".page-section.active .section-grid",
   ".page-section.active .section-card",
   ".page-section.active .content-card",

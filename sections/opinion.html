@@ -1,48 +1,42 @@
 <section class="page-section" id="page-opinion">
-  <div class="breadcrumb">
-    <span onclick="showHome()">Inicio</span> › Opinión
-  </div>
-  <div class="page-header">
-    <div class="page-header-icon" style="background:#FFF0F8">💬</div>
-    <div>
-      <h2>Opinión</h2>
-      <p>Reflexiones, comentarios y participación de la comunidad escolar</p>
+  <div class="section-hero section-hero-opinion">
+    <div class="section-hero-copy">
+      <div class="breadcrumb">
+        <span onclick="showHome()">Inicio</span> › Opinion
+      </div>
+      <p class="section-hero-kicker">La voz del campus</p>
+      <h2>Opinion</h2>
+      <p>Reflexiones, comentarios y participacion de la comunidad escolar en una vista mas ligera y menos saturada por bloques iguales.</p>
     </div>
   </div>
 
   <div class="content-card">
     <h4><span class="dot" style="background:#D4537E"></span>La voz de la comunidad</h4>
-    <p style="margin-bottom:1rem;color:var(--muted)">Esta sección reúne espacios de participación y comentarios con enfoque constructivo para mejorar la experiencia estudiantil.</p>
-    <div style="display:grid;gap:.85rem">
-      <div style="padding:1rem;border:1px solid var(--border);border-radius:14px;background:#fff">
-        <h5 style="margin-bottom:.35rem">Sugerencias estudiantiles</h5>
-        <p style="color:var(--muted)">Propuestas sobre servicios escolares, instalaciones, laboratorios y actividades extracurriculares.</p>
-      </div>
-      <div style="padding:1rem;border:1px solid var(--border);border-radius:14px;background:#fff">
-        <h5 style="margin-bottom:.35rem">Comentarios y reflexiones</h5>
-        <p style="color:var(--muted)">Espacio abierto para compartir puntos de vista, ideas de mejora y observaciones de interés general.</p>
-      </div>
+    <p style="margin-bottom:1rem;color:var(--muted)">Esta seccion reune espacios de participacion y comentarios con enfoque constructivo para mejorar la experiencia estudiantil.</p>
+    <div class="editorial-stack">
+      <div class="editorial-note"><h5>Sugerencias estudiantiles</h5><p>Propuestas sobre servicios escolares, instalaciones, laboratorios y actividades extracurriculares.</p></div>
+      <div class="editorial-note"><h5>Comentarios y reflexiones</h5><p>Espacio abierto para compartir puntos de vista, ideas de mejora y observaciones de interes general.</p></div>
     </div>
   </div>
 
   <div class="content-card" id="opinion-form-card">
-    <h4><span class="dot" style="background:#D4537E"></span>Participa también desde el buzón</h4>
-    <p>El buzón deja de ser una sección aparte y se integra aquí como canal práctico para enviar opiniones, quejas, felicitaciones o sugerencias de manera respetuosa.</p>
+    <h4><span class="dot" style="background:#D4537E"></span>Participa tambien desde el buzon</h4>
+    <p>El buzon deja de ser una seccion aparte y se integra aqui como canal practico para enviar opiniones, quejas, felicitaciones o sugerencias de manera respetuosa.</p>
     <div class="form-group" style="margin-top:1rem">
       <label for="feedback-type">Tipo de mensaje</label>
       <select id="feedback-type">
         <option value="sugerencia">Sugerencia</option>
         <option value="queja">Queja</option>
-        <option value="felicitacion">Felicitación</option>
-        <option value="opinion">Reflexión</option>
+        <option value="felicitacion">Felicitacion</option>
+        <option value="opinion">Reflexion</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="feedback-area">Área relacionada</label>
+      <label for="feedback-area">Area relacionada</label>
       <select id="feedback-area">
         <option value="Servicios escolares">Servicios escolares</option>
         <option value="Laboratorios">Laboratorios</option>
-        <option value="Atención docente">Atención docente</option>
+        <option value="Atencion docente">Atencion docente</option>
         <option value="Instalaciones">Instalaciones</option>
         <option value="Actividades extracurriculares">Actividades extracurriculares</option>
         <option value="Otro">Otro</option>
@@ -50,14 +44,14 @@
     </div>
     <div class="form-group">
       <label for="feedback-message">Tu mensaje</label>
-      <textarea id="feedback-message" placeholder="Describe tu opinión, sugerencia o comentario de manera clara y respetuosa..."></textarea>
+      <textarea id="feedback-message" placeholder="Describe tu opinion, sugerencia o comentario de manera clara y respetuosa..."></textarea>
     </div>
     <div class="form-group">
       <label for="feedback-email">¿Deseas que te contacten? (opcional)</label>
       <input id="feedback-email" type="email" placeholder="tu.correo@ejemplo.com"/>
     </div>
     <p id="feedback-error" style="display:none;font-size:12px;color:#b42318;margin-bottom:1rem"></p>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Los mensajes son anónimos a menos que proporciones tu correo. Todos los comentarios son revisados por coordinación.</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:1rem">Los mensajes son anonimos a menos que proporciones tu correo. Todos los comentarios son revisados por coordinacion.</p>
     <button class="btn-primary" id="feedback-submit" onclick="submitForm()">Enviar mensaje →</button>
   </div>
 
@@ -65,9 +59,9 @@
     <div style="text-align:center;padding:1rem">
       <div style="font-size:48px;margin-bottom:.5rem">✅</div>
       <h4 style="font-size:16px;margin-bottom:.5rem;display:block">¡Mensaje enviado!</h4>
-      <p style="color:var(--muted);font-size:14px">Gracias por tu participación. Tu mensaje fue recibido y será revisado por coordinación.</p>
+      <p style="color:var(--muted);font-size:14px">Gracias por tu participacion. Tu mensaje fue recibido y sera revisado por coordinacion.</p>
     </div>
   </div>
 
-  <div class="qr-bar">🔗 URL directa para QR de esta sección: <code id="url-opinion">#opinion</code></div>
+  <div class="qr-bar">🔗 URL directa para QR de esta seccion: <code id="url-opinion">#opinion</code></div>
 </section>

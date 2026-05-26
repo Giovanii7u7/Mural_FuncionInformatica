@@ -1,13 +1,35 @@
 <!-- HOME -->
 <section class="page-section active" id="page-home">
-  <div class="hero">
-    <div class="hero-eyebrow">Licenciaturas en Informatica · DSyS</div>
-    <h1>Periodico Mural <em>Digital</em></h1>
-    <p>Tu espacio de informacion academica, noticias y comunidad. Escanea el QR de cualquier seccion del tablon para llegar directamente aqui.</p>
-    <div class="hero-chips">
-      <span class="chip">Campus Ixtepec</span>
-      <span class="chip">UNISTMO</span>
-      <span class="chip">Acceso por QR</span>
+  <div class="hero hero-home">
+    <div class="hero-home-copy">
+      <div class="hero-eyebrow">Licenciaturas en Informatica · DSyS</div>
+      <h1>Periodico Mural <em>Digital</em></h1>
+      <p>Un mural universitario mas vivo, mas claro y con mas energia visual para destacar noticias, logros, cultura y comunidad sin que todo compita al mismo tiempo.</p>
+      <div class="hero-chips">
+        <span class="chip">Campus Ixtepec</span>
+        <span class="chip">UNISTMO</span>
+        <span class="chip">Acceso por QR</span>
+      </div>
+      <div class="hero-actions">
+        <button class="hero-primary-btn" type="button" onclick="showSection('noticias')">Explorar portada →</button>
+        <button class="hero-secondary-btn" type="button" onclick="showSection('logros')">Ver logros</button>
+      </div>
+    </div>
+
+    <div class="hero-home-visual" aria-hidden="true">
+      <div class="hero-home-photo hero-home-photo-main">
+        <img src="noticias/noticia-tarjeta-joven/todos_conferencia.jpeg" alt="Cobertura universitaria reciente"/>
+      </div>
+      <div class="hero-home-photo hero-home-photo-top">
+        <img src="cultura-altares/presentacion_altar.jpg" alt="Actividad cultural universitaria"/>
+      </div>
+      <div class="hero-home-photo hero-home-photo-bottom">
+        <img src="deportes-volley/equipo-ganador.jpeg" alt="Equipo deportivo destacado"/>
+      </div>
+      <div class="hero-home-note">
+        <span>Portada activa</span>
+        <strong>Noticias, cultura, deporte y comunidad en una sola vista.</strong>
+      </div>
     </div>
   </div>
 
@@ -15,25 +37,23 @@
     <div class="home-updates-head">
       <div>
         <div class="home-updates-eyebrow">Portada viva</div>
-        <h2>Ultimas actualizaciones</h2>
-        <p>Lo mas reciente del mural para ubicar rapido que cambio en noticias, cultura y logros.</p>
+        <h2>Lo que merece atencion primero</h2>
+        <p>Una lectura mas editorial: un tema fuerte al frente y despues un recorrido breve por lo mas reciente del mural.</p>
       </div>
       <button class="home-updates-cta" type="button" onclick="showSection('noticias')">Ver novedades →</button>
     </div>
 
     <div class="home-updates-grid">
-      <article class="home-update-card" onclick="showSection('logros')" style="--update-accent:#1D9E75;--update-soft:#E8F8F0">
-        <div class="home-update-badge">Nuevo en Logros</div>
-        <div class="home-update-stat">
-          <span class="home-update-stat-label">Top actual</span>
-          <strong>9.7</strong>
-          <span class="home-update-stat-note">Primer parcial 2025-2026B</span>
+      <article class="home-update-card home-update-card-featured" onclick="showSection('noticias')" style="--update-accent:#3B8BD4;--update-soft:#EDF4FF">
+        <div class="home-update-badge">Tema destacado</div>
+        <div class="home-update-media home-update-media-large">
+          <img src="noticias/noticia-tarjeta-joven/todos_conferencia.jpeg" alt="Vista previa de la noticia Tarjeta Joven 2026"/>
         </div>
-        <h3>Resultados del primer parcial 2025-2026B</h3>
-        <p>Ya esta visible el nuevo top general, junto con los mejores promedios por grupo y el historico anterior.</p>
+        <h3>Convocatoria Tarjeta Joven 2026</h3>
+        <p>La portada de noticias ya incluye esta cobertura reciente y ahora la seccion se organiza con un recorrido mas limpio y visual.</p>
         <div class="home-update-meta">
-          <span class="home-update-tag">Promedios</span>
-          <span class="home-update-link">Ir a Logros →</span>
+          <span class="home-update-tag">Vinculacion</span>
+          <span class="home-update-link">Ir a Noticias →</span>
         </div>
       </article>
 
@@ -50,38 +70,48 @@
         </div>
       </article>
 
-      <article class="home-update-card" onclick="showSection('noticias')" style="--update-accent:#3B8BD4;--update-soft:#EDF4FF">
-        <div class="home-update-badge">Nuevo en Noticias</div>
-        <div class="home-update-media">
-          <img src="noticias/noticia-tarjeta-joven/todos_conferencia.jpeg" alt="Vista previa de la noticia Tarjeta Joven 2026"/>
+      <article class="home-update-card" onclick="showSection('logros')" style="--update-accent:#1D9E75;--update-soft:#E8F8F0">
+        <div class="home-update-badge">Nuevo en Logros</div>
+        <div class="home-update-stat">
+          <span class="home-update-stat-label">Top actual</span>
+          <strong>9.7</strong>
+          <span class="home-update-stat-note">Primer parcial 2025-2026B</span>
         </div>
-        <h3>Convocatoria Tarjeta Joven 2026</h3>
-        <p>La portada de noticias ya incluye esta cobertura reciente y ahora la seccion se organiza con paginacion interna.</p>
+        <h3>Resultados del primer parcial 2025-2026B</h3>
+        <p>Ya esta visible el nuevo top general, junto con los mejores promedios por grupo y el historico anterior.</p>
         <div class="home-update-meta">
-          <span class="home-update-tag">Vinculacion</span>
-          <span class="home-update-link">Ir a Noticias →</span>
+          <span class="home-update-tag">Promedios</span>
+          <span class="home-update-link">Ir a Logros →</span>
         </div>
       </article>
     </div>
   </div>
 
-  <div class="section-grid">
-    <div class="section-card" style="--card-color:#E8943A;--card-bg:#FFF3E0" onclick="showSection('noticias')">
+  <div class="home-sections-intro">
+    <div>
+      <p class="home-sections-kicker">Explora por seccion</p>
+      <h2>Entradas mas claras, menos ruido visual</h2>
+    </div>
+    <p>En lugar de un muro de bloques iguales, aqui cada entrada tiene mas presencia y una direccion visual mas facil de seguir.</p>
+  </div>
+
+  <div class="section-grid section-grid-editorial">
+    <div class="section-card section-card-wide" style="--card-color:#E8943A;--card-bg:#FFF3E0" onclick="showSection('noticias')">
       <div class="card-icon">📰</div>
       <h3>Noticias</h3>
-      <p>Eventos recientes, avisos importantes y acontecimientos escolares.</p>
+      <p>Eventos recientes, avisos importantes y acontecimientos escolares con una apertura mas protagonista.</p>
       <div class="card-arrow">→</div>
     </div>
-    <div class="section-card" style="--card-color:#E8943A;--card-bg:#FFF7ED" onclick="showSection('cultura')">
+    <div class="section-card section-card-wide" style="--card-color:#E8943A;--card-bg:#FFF7ED" onclick="showSection('cultura')">
       <div class="card-icon">🎭</div>
       <h3>Cultura</h3>
-      <p>Tradiciones, actividades culturales y expresiones formativas.</p>
+      <p>Tradiciones, actividades culturales y expresiones formativas con mas foco en imagen y atmosfera.</p>
       <div class="card-arrow">→</div>
     </div>
     <div class="section-card" style="--card-color:#1D9E75;--card-bg:#E8F8F0" onclick="showSection('deportes')">
       <div class="card-icon">🏐</div>
       <h3>Deportes</h3>
-      <p>Torneos, equipos destacados y noticias deportivas escolares.</p>
+      <p>Torneos, equipos destacados y resultados con un recorrido mas dinamico y vertical.</p>
       <div class="card-arrow">→</div>
     </div>
     <div class="section-card" style="--card-color:#D4537E;--card-bg:#FDF0F8" onclick="showSection('opinion')">
@@ -99,7 +129,7 @@
     <div class="section-card" style="--card-color:#1D9E75;--card-bg:#E8F8F0" onclick="showSection('logros')">
       <div class="card-icon">🏆</div>
       <h3>Logros y Reconocimientos</h3>
-      <p>Estudiantes destacados y mejores promedios grupales.</p>
+      <p>Estudiantes destacados, podio visual y mejores promedios grupales con mayor protagonismo.</p>
       <div class="card-arrow">→</div>
     </div>
     <div class="section-card" style="--card-color:#C49A3C;--card-bg:#FFF8E7" onclick="showSection('humor')">

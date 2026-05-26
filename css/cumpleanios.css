@@ -74,14 +74,14 @@
 .bday-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: .85rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
 .bday-card {
   background: white;
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1.1rem .9rem;
+  padding: 1.2rem .95rem;
   text-align: center;
   cursor: pointer;
   transition: all .25s;

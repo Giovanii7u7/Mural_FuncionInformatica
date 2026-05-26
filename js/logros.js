@@ -13,6 +13,10 @@ function initLogrosTabs() {
       panels.forEach((panel) => {
         panel.classList.toggle("active", panel.getAttribute("data-logros-tab-panel") === target);
       });
+      const activePanel = panels.find((panel) => panel.classList.contains("active"));
+      if (typeof refreshScrollReveal === "function" && activePanel) {
+        refreshScrollReveal(activePanel);
+      }
     });
   });
 }

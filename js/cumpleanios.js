@@ -136,6 +136,9 @@ function renderBdays() {
       <div class="empty-icon">🗓</div>
       <p>No hay cumpleaños registrados en ${MESES[viewMonth]}.</p>
     </div>`;
+    if (typeof refreshScrollReveal === "function") {
+      refreshScrollReveal(document.getElementById("page-cumple"));
+    }
     return;
   }
 
@@ -154,6 +157,9 @@ function renderBdays() {
     card.onclick = () => openBdayModal(b, isToday);
     grid.appendChild(card);
   });
+  if (typeof refreshScrollReveal === "function") {
+    refreshScrollReveal(document.getElementById("page-cumple"));
+  }
 }
 
 function changeMonth(dir) {

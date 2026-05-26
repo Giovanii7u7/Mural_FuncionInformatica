@@ -1,24 +1,63 @@
 // ── Routing por hash (para QRs directos) ──────
 const sections = ['noticias','cultura','deportes','opinion','academica','logros','humor','redes','cumple'];
 
+function getActivePageId() {
+  return document.querySelector('.page-section.active')?.id || null;
+}
+
 function showHome() {
+  const activePageId = getActivePageId();
+  if (activePageId === 'page-home') {
+    setNavActive('nav-home');
+    closeSidebar();
+    history.pushState(null, '', window.location.pathname);
+    updateQRUrls();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof trackPageView === 'function') trackPageView('home');
+    return;
+  }
+
   hideAll();
-  document.getElementById('page-home').classList.add('active');
+  const page = document.getElementById('page-home');
+  page.classList.add('active');
   setNavActive('nav-home');
   closeSidebar();
   history.pushState(null, '', window.location.pathname);
   updateQRUrls();
+  if (typeof refreshScrollReveal === 'function') refreshScrollReveal(page);
   if (typeof trackPageView === 'function') trackPageView('home');
 }
 
 function showSection(id, sub = null) {
+  const targetPageId = 'page-' + id;
+  const activePageId = getActivePageId();
+  if (activePageId === targetPageId) {
+    setNavActive('nav-' + id);
+    closeSidebar();
+    const hash = sub ? id + '/' + sub : id;
+    history.pushState(null, '', '#' + hash);
+    updateQRUrls();
+    if (typeof trackPageView === 'function') trackPageView(id);
+    if (sub) {
+      setTimeout(() => {
+        const el = document.getElementById('sub-' + sub);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    return;
+  }
+
   hideAll();
-  document.getElementById('page-' + id).classList.add('active');
+  const page = document.getElementById(targetPageId);
+  page.classList.add('active');
   setNavActive('nav-' + id);
   closeSidebar();
   const hash = sub ? id + '/' + sub : id;
   history.pushState(null, '', '#' + hash);
   updateQRUrls();
+  if (typeof refreshScrollReveal === 'function') refreshScrollReveal(page);
   if (typeof trackPageView === 'function') trackPageView(id);
   if (sub) {
     setTimeout(() => {

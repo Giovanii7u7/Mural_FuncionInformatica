@@ -27,6 +27,11 @@ function showNewsPage(pageNumber) {
     button.setAttribute("aria-current", isActive ? "page" : "false");
   });
 
+  const activePage = document.querySelector(`.news-page[data-news-page="${safePage}"]`);
+  if (typeof refreshScrollReveal === "function" && activePage) {
+    refreshScrollReveal(activePage);
+  }
+
   const shell = document.querySelector(".news-pagination-shell");
   if (shell) shell.scrollIntoView({ behavior: "smooth", block: "start" });
 }

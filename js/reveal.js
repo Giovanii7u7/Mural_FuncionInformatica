@@ -72,6 +72,8 @@ function prepareRevealTargets(root = document) {
   const targets = collectRevealTargets(root);
 
   targets.forEach((element, index) => {
+    if (element.classList.contains("is-visible")) return;
+
     element.classList.add("reveal-on-scroll");
     element.style.setProperty("--reveal-delay", `${Math.min(index * 90, 720)}ms`);
 
@@ -80,7 +82,6 @@ function prepareRevealTargets(root = document) {
       return;
     }
 
-    element.classList.remove("is-visible");
     revealObserver.observe(element);
   });
 

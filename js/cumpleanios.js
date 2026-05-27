@@ -112,6 +112,7 @@ function renderBdays(force = false) {
   
   if (!title || !grid || !banner) return;
 
+  // Evitar re-renderizados innecesarios si no hay cambios
   const currentKey = `${viewMonth}-${viewYear}-${bdayData.length}`;
   if (!force && lastRenderedKey === currentKey && grid.children.length > 0) return;
   lastRenderedKey = currentKey;
@@ -119,6 +120,7 @@ function renderBdays(force = false) {
   title.textContent = `${MESES[viewMonth]} ${viewYear}`;
   grid.innerHTML = "";
 
+  // Filtrar por mes (ignorando el año para mostrar los mismos cada ciclo si es necesario)
   const inMonth = bdayData
     .filter((b) => {
       const d = new Date(b.fecha + "T12:00:00");
@@ -126,9 +128,12 @@ function renderBdays(force = false) {
     })
     .sort((a, b) => new Date(a.fecha + "T12:00:00") - new Date(b.fecha + "T12:00:00"));
 
+  // Banner de hoy (solo si coincide el mes y el año actual)
   const todayBdays = inMonth.filter((b) => {
     const d = new Date(b.fecha + "T12:00:00");
-    return d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
+    return d.getDate() === today.getDate() && 
+           d.getMonth() === today.getMonth() && 
+           viewYear === today.getFullYear();
   });
 
   if (todayBdays.length && viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
@@ -150,7 +155,9 @@ function renderBdays(force = false) {
   } else {
     inMonth.forEach((b) => {
       const d = new Date(b.fecha + "T12:00:00");
-      const isToday = d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
+      const isToday = d.getDate() === today.getDate() && 
+                      d.getMonth() === today.getMonth() && 
+                      viewYear === today.getFullYear();
       const dayNum = d.getDate();
       const card = document.createElement("div");
       card.className = "bday-card" + (isToday ? " is-today" : "");
@@ -165,8 +172,20 @@ function renderBdays(force = false) {
     });
   }
 
+  // Refrescar animaciones
   if (typeof refreshScrollReveal === "function") {
     refreshScrollReveal(document.getElementById("page-cumple") || document);
+  }
+  
+  // Soporte para AOS si está presente
+  if (typeof AOS !== "undefined" && AOS.refresh) {
+    grid.querySelectorAll('.bday-card').forEach((el, i) => {
+      if (!el.hasAttribute('data-aos')) {
+        el.setAttribute('data-aos', 'fade-up');
+        el.setAttribute('data-aos-delay', String(Math.min(i * 50, 400)));
+      }
+    });
+    AOS.refresh();
   }
 }
 

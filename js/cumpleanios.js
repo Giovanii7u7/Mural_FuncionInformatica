@@ -103,11 +103,20 @@ function getAvatarMarkup(person, altText) {
   return `<img src="${src}" alt="${escHtml(altText)}" loading="lazy"/>`;
 }
 
-function renderBdays() {
-  const title = document.getElementById("bday-month-title");
-  title.textContent = `${MESES[viewMonth]} ${viewYear}`;
+let lastRenderedKey = null;
 
+function renderBdays(force = false) {
+  const title = document.getElementById("bday-month-title");
   const grid = document.getElementById("bday-grid");
+  const banner = document.getElementById("bday-today-banner");
+  
+  if (!title || !grid || !banner) return;
+
+  const currentKey = `${viewMonth}-${viewYear}-${bdayData.length}`;
+  if (!force && lastRenderedKey === currentKey && grid.children.length > 0) return;
+  lastRenderedKey = currentKey;
+
+  title.textContent = `${MESES[viewMonth]} ${viewYear}`;
   grid.innerHTML = "";
 
   const inMonth = bdayData
@@ -117,7 +126,6 @@ function renderBdays() {
     })
     .sort((a, b) => new Date(a.fecha + "T12:00:00") - new Date(b.fecha + "T12:00:00"));
 
-  const banner = document.getElementById("bday-today-banner");
   const todayBdays = inMonth.filter((b) => {
     const d = new Date(b.fecha + "T12:00:00");
     return d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
@@ -126,7 +134,10 @@ function renderBdays() {
   if (todayBdays.length && viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
     banner.classList.remove("hidden");
     const names = todayBdays.map((b) => b.nombre.split(" ")[0]).join(", ");
-    document.getElementById("bday-today-names").textContent = `¡Hoy cumple${todayBdays.length > 1 ? "n" : ""} años: ${names}! 🎉`;
+    const bannerNames = document.getElementById("bday-today-names");
+    if (bannerNames) {
+      bannerNames.textContent = `¡Hoy cumple${todayBdays.length > 1 ? "n" : ""} años: ${names}! 🎉`;
+    }
   } else {
     banner.classList.add("hidden");
   }
@@ -136,29 +147,26 @@ function renderBdays() {
       <div class="empty-icon">🗓</div>
       <p>No hay cumpleaños registrados en ${MESES[viewMonth]}.</p>
     </div>`;
-    if (typeof refreshScrollReveal === "function") {
-      refreshScrollReveal(document.getElementById("page-cumple"));
-    }
-    return;
+  } else {
+    inMonth.forEach((b) => {
+      const d = new Date(b.fecha + "T12:00:00");
+      const isToday = d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
+      const dayNum = d.getDate();
+      const card = document.createElement("div");
+      card.className = "bday-card" + (isToday ? " is-today" : "");
+      card.innerHTML = `
+        <div class="bday-avatar bday-avatar-photo" style="background:${b.color}">${getAvatarMarkup(b, b.nombre)}</div>
+        <h5>${b.nombre}</h5>
+        <div class="bday-group">${b.grupo}</div>
+        <span class="bday-date-pill">${dayNum} de ${MESES[viewMonth]}</span>
+      `;
+      card.onclick = () => openBdayModal(b, isToday);
+      grid.appendChild(card);
+    });
   }
 
-  inMonth.forEach((b) => {
-    const d = new Date(b.fecha + "T12:00:00");
-    const isToday = d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
-    const dayNum = d.getDate();
-    const card = document.createElement("div");
-    card.className = "bday-card" + (isToday ? " is-today" : "");
-    card.innerHTML = `
-      <div class="bday-avatar bday-avatar-photo" style="background:${b.color}">${getAvatarMarkup(b, b.nombre)}</div>
-      <h5>${b.nombre}</h5>
-      <div class="bday-group">${b.grupo}</div>
-      <span class="bday-date-pill">${dayNum} de ${MESES[viewMonth]}</span>
-    `;
-    card.onclick = () => openBdayModal(b, isToday);
-    grid.appendChild(card);
-  });
   if (typeof refreshScrollReveal === "function") {
-    refreshScrollReveal(document.getElementById("page-cumple"));
+    refreshScrollReveal(document.getElementById("page-cumple") || document);
   }
 }
 
@@ -172,7 +180,7 @@ function changeMonth(dir) {
     viewMonth = 11;
     viewYear--;
   }
-  renderBdays();
+  renderBdays(true);
 }
 
 function loadComments(bdayId) {
@@ -403,14 +411,6 @@ function stopConfetti() {
   }
   ctx2.clearRect(0, 0, cvs.width, cvs.height);
 }
-
-document.getElementById("nav-cumple") && (() => {
-  const orig = window.showSection;
-  window.showSection = function(id, sub) {
-    orig(id, sub);
-    if (id === "cumple") renderBdays();
-  };
-})();
 
 window.addEventListener("DOMContentLoaded", async () => {
   bdayData = await loadBdays();

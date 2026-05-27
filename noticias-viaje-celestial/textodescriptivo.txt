@@ -1,0 +1,5 @@
+Alumnos de Ingeniería en Desarrollo de Sistemas y Software (IDSyS) y Licenciatura en Informática de la UNISTMO Campus Ixtepec realizan viaje de prácticas a la Ciudad de México
+
+Como parte de su formación integral y vinculación con la industria tecnológica de vanguardia, estudiantes de las carreras de Licenciatura en Informática e IDSyS de la Universidad del Istmo (UNISTMO), Campus Ixtepec, llevaron a cabo un viaje de prácticas a las instalaciones de la empresa Celestial Dynamics en la Ciudad de México.
+
+Durante la visita, los alumnos asistieron a una serie de conferencias y demostraciones técnicas centradas en la innovación y el impacto de la Inteligencia Artificial en el desarrollo de soluciones y sistemas complejos. La experiencia permitió a los futuros profesionistas conocer de primera mano cómo se implementan los grafos de conocimiento de gran escala y la infraestructura de procesamiento avanzada (en colaboración con aliados tecnológicos como NVIDIA) para resolver problemáticas del mundo real, fortaleciendo así su visión profesional en la recta final de sus estudios universitarios.

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/layout.css"/>
 <link rel="stylesheet" href="css/components.css"/>
 <link rel="stylesheet" href="css/cumpleanios.css"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -153,6 +154,7 @@
 <!-- ═══════════════════════════════════════════
      JAVASCRIPT — módulos
 ═══════════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="js/supabase.js"></script>
 <script src="js/sidebar.js"></script>
 <script src="js/router.js"></script>
@@ -180,7 +182,12 @@
         .then(html => { document.getElementById(id).innerHTML = html; })
     )
   ).then(() => {
-    // Una vez cargadas todas las secciones, inicializar routing y cumpleaños
+    document.querySelectorAll('.page-header, .content-card, .doc-link, .bday-card, .red-card, .nav-card, .noticia-card, .logro-card, .tutor-card').forEach((el, i) => {
+      el.setAttribute('data-aos', 'fade-up');
+      el.setAttribute('data-aos-delay', String(Math.min((i % 12) * 80, 600)));
+    });
+    AOS.init({ duration: 800, easing: 'ease-out', once: true });
+    AOS.refresh();
     if (typeof routeFromHash === 'function') routeFromHash();
     if (typeof updateQRUrls  === 'function') updateQRUrls();
     if (typeof renderBdays   === 'function') renderBdays();

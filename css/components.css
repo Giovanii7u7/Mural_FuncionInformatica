@@ -1910,6 +1910,17 @@ tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(9, 25, 48, .14);
+  background: white;
+}
+
+.section-hero-media.is-poster {
+  min-height: auto;
+  align-self: flex-start;
+}
+
+.section-hero-media.is-poster img {
+  height: auto;
+  object-fit: contain;
 }
 
 .section-hero-stat {

@@ -19,4 +19,32 @@ function initLogrosTabs() {
       }
     });
   });
+
+  // Paginación interna para parciales
+  initLogrosPagination();
+}
+
+function initLogrosPagination() {
+  const controls = document.getElementById("logros-pagination-controls");
+  if (!controls) return;
+  if (controls.dataset.bound === "true") return;
+  controls.dataset.bound = "true";
+
+  const buttons = Array.from(controls.querySelectorAll("[data-logros-page-target]"));
+  const pages = Array.from(document.querySelectorAll(".logros-page[data-logros-page]"));
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetPage = btn.getAttribute("data-logros-page-target");
+
+      buttons.forEach((b) => b.classList.toggle("is-active", b === btn));
+      pages.forEach((p) => {
+        const isActive = p.getAttribute("data-logros-page") === targetPage;
+        p.style.display = isActive ? "block" : "none";
+        if (isActive && typeof refreshScrollReveal === "function") {
+          refreshScrollReveal(p);
+        }
+      });
+    });
+  });
 }
